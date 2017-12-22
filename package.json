@@ -1,0 +1,18 @@
+{
+  "name": "prototype_workshops",
+  "version": "1.0.0",
+  "description": "My first real attempt at my own static site generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dustin Pfister",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "js-yaml": "^3.10.0",
+    "marked": "^0.3.7",
+    "mkdirp": "^0.5.1",
+    "node-dir": "^0.1.17",
+    "nopt": "^4.0.1"
+  }
+}
