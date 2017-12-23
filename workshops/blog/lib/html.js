@@ -108,21 +108,54 @@ let mkPage = function (conf, pageNum, posts, done) {
 
     let uri_base = path.join(conf.target, 'page'),
     uri_folder = '',
+    uri_page = path.join(uri_base, uri_folder),
     uri_fn = 'index.html',
-    uri = path.join(uri_base, uri_fn);
+    uri = path.join(uri_page, uri_fn);
 
     if (pageNum != 1) {
 
         uri_folder = pageNum + '';
-        uri = path.join(uri_base, uri_folder, uri_fn);
+
+        uri_page = path.join(uri_base, uri_folder);
+        uri = path.join(uri_page, uri_fn);
 
     }
 
-    log(uri);
-    log(pageNum);
-    log('**********');
+    // make sure uri_page is there ( /page/3 )
+    mkdirp(uri_page, function (e) {
 
-    done();
+        if (e) {
+
+            console.log(e);
+
+        }
+
+        ejs.renderFile(conf.layout, {
+
+            layout: 'page.ejs',
+            pageNum: pageNum,
+            posts: posts
+
+        }, function (e, html) {
+
+		    if(e){
+				
+				log(e);
+				
+			}
+		
+		
+            // write the file
+            fs.writeFile(uri, html, 'utf-8', function (e) {
+
+                log('generated page: ' + uri);
+                done();
+
+            });
+
+        });
+
+    });
 
 };
 
@@ -139,13 +172,13 @@ html.page = function (conf, db, done) {
             return b.date - a.date;
 
         }),
-		
-		/*.map(function (obj) {
-            return {
-                uri: obj.uri
-            }
-        }),
-		*/
+
+    /*.map(function (obj) {
+    return {
+    uri: obj.uri
+    }
+    }),
+     */
 
     pages = _.chunk(posts, conf.perPage || 2),
     i = 0,
