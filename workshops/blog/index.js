@@ -8,41 +8,38 @@ path = require('path'),
 fs = require('fs'),
 _ = require('lodash'),
 
-pat_md = /.md$/;
+pat_md = /.md$/,
+pat_header = /---[\s|\S]*---/,
+pat_dash = /---/g;
 
-var build = function (conf) {
+var buildPosts = function (conf,db) {
 
-    // build the database
-    require('./lib/build_db.js').build(conf, function (db) {
+    console.log('ready to build');
 
-        console.log('ready to build');
+    _.each(db.reports, function (report) {
 
-        _.each(db.reports, function (report) {
+        var uri_date = path.join(conf.target, report.path),
+        uri_post = path.join(uri_date, path.basename(report.uri.replace(pat_md, ''))),
+        uri_filename = 'index.html',
+        uri = path.join(uri_post, uri_filename);
 
-            var uri_date = path.join(conf.target, report.path),
-            uri_post = path.join(uri_date, path.basename(report.uri.replace(pat_md, ''))),
-            uri_filename = 'index.html',
-            uri = path.join(uri_post, uri_filename);
+        // make sure the post uri is there
+        mkdirp(uri_post, function (err) {
 
-            // make sure the post uri is there
-            mkdirp(uri_post, function (err) {
+            fs.readFile(report.uri, 'utf-8', function (e, md) {
 
-                fs.readFile(report.uri, 'utf-8', function (e, md) {
+                var html = marked(md.replace(pat_header, ''));
+                ejs.renderFile(conf.layout, {
 
-                    var html = marked(md);
-                    ejs.renderFile(conf.layout, {
+                    body: 'post.ejs',
+                    content: html
 
-                        body: 'post.ejs',
-                        content: html
+                }, function (e, html) {
 
-                    }, function (e, html) {
+                    // write the file
+                    fs.writeFile(uri, html, 'utf-8', function (e) {
 
-                        // write the file
-                        fs.writeFile(uri, html, 'utf-8', function (e) {
-
-                            console.log('generated: ' + uri);
-
-                        });
+                        console.log('generated: ' + uri);
 
                     });
 
@@ -50,27 +47,21 @@ var build = function (conf) {
 
             });
 
-            /*
-            fs.readFile(report.uri, 'utf-8', function(err,md){
-
-            if(err){
-
-            console.log(err);
-
-            }
-
-            fs.writeFile(uri,ejs)
-
-            console.log(md);
-
-
-            });
-
-             */
-
         });
 
     });
+
+};
+
+var build = function (conf) {
+
+    // build the database
+    require('./lib/build_db.js').build(conf, function (db) {
+		
+		buildPosts(conf,db);
+		
+		
+	});
 
 };
 
