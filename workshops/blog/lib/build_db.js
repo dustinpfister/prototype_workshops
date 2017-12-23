@@ -1,10 +1,5 @@
 
-var yaml = require('js-yaml'),
-marked = require('marked'),
-dir = require('node-dir'),
-mkdirp = require('mkdirp'),
-//ejs = require('ejs'),
-path = require('path'),
+var dir = require('node-dir'),
 fs = require('fs'),
 _ = require('lodash'),
 
@@ -61,26 +56,14 @@ var buildDB = function (conf, done) {
             reports: reports
         };
 
-        // when done
-        //console.log('writing post reprots to database...');
-
-        //fs.writeFile(conf.db, JSON.stringify(db), function (e) {
-
-        //    if (e) {
-
-        //        console.log(e);
-
-        //    }
-
         console.log('done building db.');
         done(db);
-
-        //});
 
     });
 
 };
 
+// set page data
 var setPage = function (db) {
 
     console.log('setting up page object...');
