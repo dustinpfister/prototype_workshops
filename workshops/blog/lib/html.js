@@ -12,12 +12,20 @@ mkdirp = require('mkdirp'),
 fs = require('fs'),
 ejs = require('ejs'),
 
+log = function (mess) {
+
+    return console.log('html: ' + mess);
+
+},
+
 pat_md = /.md$/,
 pat_header = /---[\s|\S]*---/,
 pat_dash = /---/g;
- 
+
+let html = {};
+
 // write a *.html file for a blog post at conf.target/yyyy/mm/dd/[md-filename]
-let html_post = function (conf, report, done) {
+html.post = function (conf, report, done) {
 
     done = done || function () {};
 
@@ -43,7 +51,7 @@ let html_post = function (conf, report, done) {
                 // write the file
                 fs.writeFile(uri, html, 'utf-8', function (e) {
 
-                    console.log('generated: ' + uri);
+                    log('generated: ' + uri);
                     done();
 
                 });
@@ -56,5 +64,42 @@ let html_post = function (conf, report, done) {
 
 };
 
+// build ALL *.html files for all posts in the given db
+html.years = function (conf, db, done) {
+
+    done = done || function () {};
+    log('**********');
+    log('building posts for year folders (/yyyy/mm/dd/postname) ');
+
+    var i = 0,
+    len = db.reports.length;
+
+    loop = function () {
+
+        html.post(conf, db.reports[i], function () {
+
+            i += 1;
+
+            if (i < len) {
+
+                loop();
+
+            } else {
+
+                log('all done with year folders');
+                log('**********');
+                done();
+
+            }
+
+        })
+
+    };
+
+    loop();
+
+};
+
 // export
-exports.post = html_post;
+exports.post = html.post;
+exports.years = html.years;
