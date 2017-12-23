@@ -11,7 +11,6 @@ pat_md = /.md$/;
 
 var forEach = function (conf, content, fn, next) {
 
-    console.log(fn);
 
     require('./read_md.js').build(fn).then(function (report) {
 
