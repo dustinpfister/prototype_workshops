@@ -11,6 +11,7 @@ marked = require('marked'),
 mkdirp = require('mkdirp'),
 fs = require('fs'),
 ejs = require('ejs'),
+_ = require('lodash'),
 
 log = function (mess) {
 
@@ -100,6 +101,25 @@ html.years = function (conf, db, done) {
 
 };
 
+// build the page path
+html.page = function (conf, db, done) {
+
+    done = done || function () {};
+    log('**********');
+    log('building page path ');
+
+    // !! I am doing this here.
+    var posts = db.reports.sort();
+
+    _.each(posts, function (post) {
+
+        console.log(post);
+
+    });
+
+};
+
 // export
-exports.post = html.post;
+//exports.post = html.post;
 exports.years = html.years;
+exports.page = html.page;

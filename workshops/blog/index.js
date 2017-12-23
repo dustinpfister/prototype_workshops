@@ -12,6 +12,8 @@ build = function (conf) {
 
             console.log('ready to build pages');
 
+            html.page(conf, db, function () {});
+
         });
 
     });
