@@ -1,3 +1,11 @@
+/*
+
+build_db.js
+
+This will build the database that will be used to make the file structure of the site
+
+
+ */
 
 var dir = require('node-dir'),
 fs = require('fs'),
@@ -64,7 +72,7 @@ var buildDB = function (conf, done) {
 };
 
 // set page data
-var setPage = function (db) {
+var setPage = function (conf, db) {
 
     console.log('setting up page object...');
 
@@ -101,7 +109,7 @@ var setPage = function (db) {
 
             var m = db.page[yKey][mKey];
 
-            m = _.chunk(m, 4);
+            db.page[yKey][mKey] = _.chunk(m, conf.perPage || 4);
 
         });
 
@@ -109,12 +117,15 @@ var setPage = function (db) {
 
 };
 
-var build = function (conf) {
+// build and write the database
+var build = function (conf, done) {
+
+    done = done || function () {};
 
     // build db
     buildDB(conf, function (db) {
 
-        setPage(db);
+        setPage(conf, db);
 
         console.log('writing json...');
         fs.writeFile(conf.db, JSON.stringify(db), function (e) {
@@ -126,6 +137,7 @@ var build = function (conf) {
             } else {
 
                 console.log('db.json written at: ' + conf.db);
+                done(db);
 
             }
 

@@ -6,6 +6,9 @@ ws.build({
     source: './source/_posts',
     target: './html',
     layout: './workshops/blog/theme/layout.ejs',
-    db: './workshops/blog/db.json'
+    db: './workshops/blog/db.json',
+
+    // page
+    perPage: 2
 
 });
