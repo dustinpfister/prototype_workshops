@@ -88,6 +88,7 @@ if (require.main === module) {
 
     // being used as a module with require
 
-    exports.build = build;
+    //exports.build = build;
+	exports.build = require('./lib/build_db.js').build
 
 }
