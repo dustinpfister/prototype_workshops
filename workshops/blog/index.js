@@ -12,6 +12,7 @@ pat_md = /.md$/;
 
 var build = function (conf) {
 
+    // build the database
     require('./lib/build_db.js').build(conf, function (db) {
 
         console.log('ready to build');
@@ -23,13 +24,55 @@ var build = function (conf) {
             uri_filename = 'index.html',
             uri = path.join(uri_post, uri_filename);
 
-            console.log(uri);
+            // make sure the post uri is there
+            mkdirp(uri_post, function (err) {
+
+                fs.readFile(report.uri, 'utf-8', function (e, md) {
+
+                    var html = marked(md);
+                    ejs.renderFile(conf.layout, {
+
+                        body: 'post.ejs',
+                        content: html
+
+                    }, function (e, html) {
+
+                        // write the file
+                        fs.writeFile(uri, html, 'utf-8', function (e) {
+
+                            console.log('generated: ' + uri);
+
+                        });
+
+                    });
+
+                });
+
+            });
+
+            /*
+            fs.readFile(report.uri, 'utf-8', function(err,md){
+
+            if(err){
+
+            console.log(err);
+
+            }
+
+            fs.writeFile(uri,ejs)
+
+            console.log(md);
+
+
+            });
+
+             */
 
         });
 
     });
 
-}
+};
 
 /*
 // the build method
