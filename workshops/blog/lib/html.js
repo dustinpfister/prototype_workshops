@@ -44,7 +44,7 @@ html.post = function (conf, report, done) {
 
             ejs.renderFile(conf.layout, {
 
-                body: 'post.ejs',
+                layout: 'post.ejs',
                 content: html
 
             }, function (e, html) {
@@ -101,6 +101,31 @@ html.years = function (conf, db, done) {
 
 };
 
+// make a page
+let mkPage = function (conf, pageNum, posts, done) {
+
+    done = done || function () {};
+
+    let uri_base = path.join(conf.target, 'page'),
+    uri_folder = '',
+    uri_fn = 'index.html',
+    uri = path.join(uri_base, uri_fn);
+
+    if (pageNum != 1) {
+
+        uri_folder = pageNum + '';
+        uri = path.join(uri_base, uri_folder, uri_fn);
+
+    }
+
+    log(uri);
+    log(pageNum);
+    log('**********');
+
+    done();
+
+};
+
 // build the page path
 html.page = function (conf, db, done) {
 
@@ -113,11 +138,14 @@ html.page = function (conf, db, done) {
 
             return b.date - a.date;
 
-        }).map(function (obj) {
+        }),
+		
+		/*.map(function (obj) {
             return {
                 uri: obj.uri
             }
         }),
+		*/
 
     pages = _.chunk(posts, conf.perPage || 2),
     i = 0,
@@ -126,14 +154,16 @@ html.page = function (conf, db, done) {
     // loop
     loop = function () {
 
-        log(pages[i]);
+        mkPage(conf, i + 1, pages[i], function () {
 
-        i += 1;
-        if (i < len) {
+            i += 1;
+            if (i < len) {
 
-            loop();
+                loop();
 
-        }
+            }
+
+        });
 
     };
 
