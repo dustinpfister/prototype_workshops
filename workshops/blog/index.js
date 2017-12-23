@@ -12,36 +12,35 @@ pat_md = /.md$/,
 pat_header = /---[\s|\S]*---/,
 pat_dash = /---/g;
 
-var buildPosts = function (conf,db) {
+var buildReport = function (conf, report, done) {
 
-    console.log('ready to build');
+    done = done || function () {};
 
-    _.each(db.reports, function (report) {
+    //_.each(db.reports, function (report) {
 
-        var uri_date = path.join(conf.target, report.path),
-        uri_post = path.join(uri_date, path.basename(report.uri.replace(pat_md, ''))),
-        uri_filename = 'index.html',
-        uri = path.join(uri_post, uri_filename);
+    var uri_date = path.join(conf.target, report.path),
+    uri_post = path.join(uri_date, path.basename(report.uri.replace(pat_md, ''))),
+    uri_filename = 'index.html',
+    uri = path.join(uri_post, uri_filename);
 
-        // make sure the post uri is there
-        mkdirp(uri_post, function (err) {
+    // make sure the post uri is there
+    mkdirp(uri_post, function (err) {
 
-            fs.readFile(report.uri, 'utf-8', function (e, md) {
+        fs.readFile(report.uri, 'utf-8', function (e, md) {
 
-                var html = marked(md.replace(pat_header, ''));
-                ejs.renderFile(conf.layout, {
+            var html = marked(md.replace(pat_header, ''));
+            ejs.renderFile(conf.layout, {
 
-                    body: 'post.ejs',
-                    content: html
+                body: 'post.ejs',
+                content: html
 
-                }, function (e, html) {
+            }, function (e, html) {
 
-                    // write the file
-                    fs.writeFile(uri, html, 'utf-8', function (e) {
+                // write the file
+                fs.writeFile(uri, html, 'utf-8', function (e) {
 
-                        console.log('generated: ' + uri);
-
-                    });
+                    console.log('generated: ' + uri);
+                    done();
 
                 });
 
@@ -51,17 +50,56 @@ var buildPosts = function (conf,db) {
 
     });
 
+    //});
+
+};
+
+var buildPosts = function (conf, db, done) {
+
+    done = done || function () {};
+    console.log('ready to build posts.');
+
+    var i = 0,
+    len = db.reports.length;
+
+    loop = function () {
+
+        buildReport(conf, db.reports[i], function () {
+
+            i += 1;
+
+            if (i < len) {
+
+                loop();
+
+            } else {
+
+                console.log('all done');
+                done();
+
+            }
+
+        })
+
+    };
+
+    loop();
+
 };
 
 var build = function (conf) {
 
     // build the database
     require('./lib/build_db.js').build(conf, function (db) {
-		
-		buildPosts(conf,db);
-		
-		
-	});
+
+        // build posts
+        buildPosts(conf, db, function () {
+
+            console.log('ready to build pages');
+
+        });
+
+    });
 
 };
 
