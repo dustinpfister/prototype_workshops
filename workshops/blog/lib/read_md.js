@@ -33,7 +33,7 @@ var readMD = function (report) {
 
 };
 
-// get yaml header from report.md
+// Set report.header to the parsed yaml, or false.
 var getHeader = function (report) {
 
     var pat_header = /---[\s|\S]*---/,
@@ -65,6 +65,7 @@ var getHeader = function (report) {
 
                 report.header = false;
 
+                // reject with the error if safe load of a header fails
                 reject(e);
 
             }
@@ -76,6 +77,39 @@ var getHeader = function (report) {
         }
 
         resolve(report);
+
+    });
+
+};
+
+// set dates for report from header data, or fs.stats
+var setDates = function (report) {
+
+    return new Promise(function (resolve, reject) {
+
+        fs.stat(report.uri, function (e, stat) {
+
+            if (e) {
+
+                reject(e);
+
+            }
+
+            // default to stat data
+            report.date = stat.atime;
+            report.update = stat.mtime;
+
+            // use header dates if there
+            if (report.header) {
+
+                report.date = report.header.date || report.date;
+                report.update = report.header.update || report.update;
+
+            }
+
+            resolve(report);
+
+        });
 
     });
 
@@ -95,6 +129,10 @@ exports.build = function (uri) {
         readMD(report).then(function (report) {
 
             return getHeader(report);
+
+        }).then(function (report) {
+
+            return setDates(report);
 
         }).then(function (report) {
 
