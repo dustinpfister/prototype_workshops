@@ -1,9 +1,10 @@
 /*
-
- * attempt to get a header if present
- * go by fd.stats if no header
-
+ *    md_report.js
+ *
+ *    This file makes a report object for a markdown file at a given uri
+ *
  */
+
 var fs = require('fs'),
 yaml = require('js-yaml'),
 path = require('path'),

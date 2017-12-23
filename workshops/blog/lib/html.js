@@ -31,7 +31,7 @@ html.post = function (conf, report, done) {
     done = done || function () {};
 
     let uri_date = path.join(conf.target, report.path),
-    uri_post = path.join(uri_date, path.basename(report.uri.replace(pat_md, ''))),
+    uri_post = path.join(uri_date, report.fn),
     uri_filename = 'index.html',
     uri = path.join(uri_post, uri_filename);
 
