@@ -6,6 +6,7 @@ mkdirp = require('mkdirp'),
 //ejs = require('ejs'),
 path = require('path'),
 fs = require('fs'),
+_ = require('lodash'),
 
 pat_md = /.md$/,
 
@@ -61,18 +62,63 @@ var buildDB = function (conf, done) {
         };
 
         // when done
-        console.log('writing post reprots to database...');
+        //console.log('writing post reprots to database...');
 
-        fs.writeFile(conf.db, JSON.stringify(db), function (e) {
+        //fs.writeFile(conf.db, JSON.stringify(db), function (e) {
 
-            if (e) {
+        //    if (e) {
 
-                console.log(e);
+        //        console.log(e);
 
-            }
+        //    }
 
-            console.log('done building db.');
-            done(db);
+        console.log('done building db.');
+        done(db);
+
+        //});
+
+    });
+
+};
+
+var setPage = function (db) {
+
+    console.log('setting up page object...');
+
+    db.page = {};
+
+    db.reports.forEach(function (report) {
+
+        var yKey = 'y' + report.y,
+        mKey = 'm' + report.m;
+
+        // if nothing for the year yet
+        if (!db.page[yKey]) {
+
+            db.page[yKey] = {};
+
+        }
+
+        // if nothing for the month yet
+        if (!db.page[yKey][mKey]) {
+
+            db.page[yKey][mKey] = [];
+
+        }
+
+        var m = db.page[yKey][mKey];
+
+        m.push(report.uri);
+
+    });
+
+    _.each(Object.keys(db.page), function (yKey) {
+
+        _.each(Object.keys(db.page[yKey]), function (mKey) {
+
+            var m = db.page[yKey][mKey];
+
+            m = _.chunk(m, 4);
 
         });
 
@@ -85,32 +131,22 @@ var build = function (conf) {
     // build db
     buildDB(conf, function (db) {
 
-        db.page = {};
+        setPage(db);
 
-        db.reports.forEach(function (report) {
+        console.log('writing json...');
+        fs.writeFile(conf.db, JSON.stringify(db), function (e) {
 
-            var yKey = 'y' + report.y,
-            mKey = 'm' + report.m;
+            if (e) {
 
-            // if nothing for the year yet
-            if (!db.page[yKey]) {
+                console.log(e);
 
-                db.page[yKey] = {};
+            } else {
 
-            }
-
-            // if nothing for the month yet
-            if (!db.page[mKey]) {
-
-                db.page[yKey][mKey] = [];
+                console.log('db.json written at: ' + conf.db);
 
             }
-
-            var month = db.page[yKey][mKey];
 
         });
-
-        console.log(db);
 
     });
 
