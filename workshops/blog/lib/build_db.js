@@ -58,6 +58,20 @@ var build = function (conf) {
         console.log('writing post reprots to database...');
         console.log(reports);
 
+        fs.writeFile(conf.db, JSON.stringify({
+                reports: reports
+            }), function (e) {
+
+            if (e) {
+
+                console.log(e);
+
+            }
+
+            console.log('done');
+
+        });
+
     });
 
 };
