@@ -31,9 +31,11 @@ var forEach = function (conf, content, fn, next) {
 };
 
 // the build method
-var build = function (conf) {
+var buildDB = function (conf, done) {
 
     // !! putting up with callback hell (for now)
+
+    done = done || function () {};
 
     console.log('building a database...');
 
@@ -54,13 +56,14 @@ var build = function (conf) {
         // for each file
     }, function (err, files) {
 
+        var db = {
+            reports: reports
+        };
+
         // when done
         console.log('writing post reprots to database...');
-        console.log(reports);
 
-        fs.writeFile(conf.db, JSON.stringify({
-                reports: reports
-            }), function (e) {
+        fs.writeFile(conf.db, JSON.stringify(db), function (e) {
 
             if (e) {
 
@@ -68,9 +71,46 @@ var build = function (conf) {
 
             }
 
-            console.log('done');
+            console.log('done building db.');
+            done(db);
 
         });
+
+    });
+
+};
+
+var build = function (conf) {
+
+    // build db
+    buildDB(conf, function (db) {
+
+        db.page = {};
+
+        db.reports.forEach(function (report) {
+
+            var yKey = 'y' + report.y,
+            mKey = 'm' + report.m;
+
+            // if nothing for the year yet
+            if (!db.page[yKey]) {
+
+                db.page[yKey] = {};
+
+            }
+
+            // if nothing for the month yet
+            if (!db.page[mKey]) {
+
+                db.page[yKey][mKey] = [];
+
+            }
+
+            var month = db.page[yKey][mKey];
+
+        });
+
+        console.log(db);
 
     });
 

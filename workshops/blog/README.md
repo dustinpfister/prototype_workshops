@@ -7,6 +7,35 @@ The first step in the build process is to build a database for all the posts. Th
 
 I might make a json file like this:
 ```js
+page: {
+
+   y2017 : {
+   
+        m03: [
+ 
+            [
+ 
+                '/2017/03/29/nodejs-harp/',
+                '/2017/03/27/nodejs-harp/',
+                '/2017/03/24/nodejs-harp/',
+                '/2017/03/28/nodejs-harp/',
+                '/2017/03/26/nodejs-harp/'
+ 
+ 
+            ],
+ 
+            [
+
+                '/2017/03/26/other-post'
+ 
+            ]
+ 
+        ]
+   
+   }
+
+}
+
 {
  
     byYear : [
