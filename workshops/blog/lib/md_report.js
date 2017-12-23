@@ -27,7 +27,7 @@ var readMD = function (report) {
             } else {
 
                 // filename ( '/foo/bar.md' => 'bar' )
-                report.fn = path.basename(report.uri).replace(pat_md,'');
+                report.fn = path.basename(report.uri).replace(pat_md, '');
 
                 resolve({
                     report: report,
@@ -98,7 +98,7 @@ var getHeader = function (report, md) {
 };
 
 // set dates for report from header data, or fs.stats
-var setDates = function (report) {
+var setDates = function (conf, report) {
 
     // pad a number ( 2 to 02 )
     var pad = function (n) {
@@ -137,6 +137,8 @@ var setDates = function (report) {
             report.d = pad(report.date.getDate());
             report.path = report.y + '/' + report.m + '/' + report.d;
 
+            report.href = path.join(conf.uri_post_base, report.path, report.fn, 'index.html');
+
             resolve(report);
 
         });
@@ -146,7 +148,7 @@ var setDates = function (report) {
 }
 
 // the call method
-exports.build = function (uri) {
+exports.build = function (conf, uri) {
 
     var report = {
 
@@ -162,7 +164,7 @@ exports.build = function (uri) {
 
         }).then(function (report) {
 
-            return setDates(report);
+            return setDates(conf, report);
 
         }).then(function (report) {
 

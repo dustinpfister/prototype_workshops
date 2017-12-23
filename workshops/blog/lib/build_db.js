@@ -17,7 +17,7 @@ reports = [];
 
 var forEach = function (conf, content, fn, next) {
 
-    require('./md_report.js').build(fn).then(function (report) {
+    require('./md_report.js').build(conf,fn).then(function (report) {
 
         console.log('have info for: ' + report.uri);
         reports.push(report);

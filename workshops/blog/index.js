@@ -31,7 +31,7 @@ if (require.main === module) {
         target: '../../html/',
         layout: './theme/layout.ejs',
         db: './db.json',
-
+        uri_base : '../',
         // page
         perPage: 4
 

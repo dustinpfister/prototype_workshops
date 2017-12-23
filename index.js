@@ -7,6 +7,8 @@ ws.build({
     target: './html',
     layout: './workshops/blog/theme/layout.ejs',
     db: './workshops/blog/db.json',
+	
+	uri_post_base : '../',
 
     // page
     perPage: 5

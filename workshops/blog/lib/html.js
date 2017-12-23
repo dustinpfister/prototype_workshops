@@ -138,13 +138,12 @@ let mkPage = function (conf, pageNum, posts, done) {
 
         }, function (e, html) {
 
-		    if(e){
-				
-				log(e);
-				
-			}
-		
-		
+            if (e) {
+
+                log(e);
+
+            }
+
             // write the file
             fs.writeFile(uri, html, 'utf-8', function (e) {
 
