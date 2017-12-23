@@ -34,10 +34,15 @@ var readMD = function (report) {
 };
 
 // Set report.header to the parsed yaml, or false.
+// set relevant data from header, or defaults
 var getHeader = function (report) {
 
     var pat_header = /---[\s|\S]*---/,
     pat_dash = /---/g;
+
+    // hard coded defaults for categories, and tags
+    report.categories = 'misc';
+    report.tags = ['misc'];
 
     return new Promise(function (resolve, reject) {
 
@@ -60,6 +65,10 @@ var getHeader = function (report) {
 
                 // try to load
                 report.header = yaml.safeLoad(report.header);
+
+                // set categories and tags from header
+                report.categories = report.header.categories || report.categories;
+                report.tags = report.header.tags || report.tags;
 
             } catch (e) {
 
