@@ -3,6 +3,7 @@ var yaml = require('js-yaml'),
 marked = require('marked'),
 dir = require('node-dir'),
 mkdirp = require('mkdirp'),
+ejs = require('ejs'),
 path = require('path'),
 fs = require('fs'),
 
@@ -35,14 +36,27 @@ var build = function (conf) {
 
             // fine out the new filename, and file path
             var target_filename = path.basename(fn).replace(pat_md, '.html'),
-            target_filepath = path.join(target, target_filename);
+            target_filepath = path.join(target, target_filename),
+            html = marked(content);
 
-            // write the file
-            fs.writeFile(target_filepath, marked(content), 'utf-8', function (e) {
+            ejs.renderFile('./theme/layout.ejs', {
 
-                console.log('generated: ' + target_filepath);
+                body: 'post.ejs',
+                content: html
 
-                next();
+            }, function (e, html) {
+
+                console.log(e);
+                console.log(html);
+
+                // write the file
+                fs.writeFile(target_filepath, html, 'utf-8', function (e) {
+
+                    console.log('generated: ' + target_filepath);
+
+                    next();
+
+                });
 
             });
 
@@ -51,7 +65,6 @@ var build = function (conf) {
     }, function (err, files) {
 
         // when done
-
         console.log('done');
 
     });
@@ -60,7 +73,7 @@ var build = function (conf) {
 
 if (require.main === module) {
 
-    // being used as a cli
+    // if being used as a stand alone CLI tool
 
     // for now just call build here like this
     build({

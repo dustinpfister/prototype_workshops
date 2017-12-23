@@ -9,6 +9,7 @@
   "author": "Dustin Pfister",
   "license": "GPL-3.0",
   "dependencies": {
+    "ejs": "^2.5.7",
     "js-yaml": "^3.10.0",
     "marked": "^0.3.7",
     "mkdirp": "^0.5.1",
