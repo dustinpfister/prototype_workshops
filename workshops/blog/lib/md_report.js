@@ -5,9 +5,14 @@
 
  */
 var fs = require('fs'),
-yaml = require('js-yaml');
+yaml = require('js-yaml'),
+path = require('path'),
 
-// read markdown at report.uri, and attach raw markdown to the report object
+pat_md = /.md$/,
+pat_header = /---[\s|\S]*---/,
+pat_dash = /---/g;
+
+// read markdown at report.uri, append some values to report object, and pass both in a new object
 var readMD = function (report) {
 
     return new Promise(function (resolve, reject) {
@@ -20,10 +25,13 @@ var readMD = function (report) {
 
             } else {
 
-                // raw md
-                //report.md = md;
+                // filename ( '/foo/bar.md' => 'bar' )
+                report.fn = path.basename(report.uri).replace(pat_md,'');
 
-                resolve({report:report,md:md});
+                resolve({
+                    report: report,
+                    md: md
+                });
 
             }
 
@@ -35,10 +43,7 @@ var readMD = function (report) {
 
 // Set report.header to the parsed yaml, or false.
 // set relevant data from header, or defaults
-var getHeader = function (report,md) {
-
-    var pat_header = /---[\s|\S]*---/,
-    pat_dash = /---/g;
+var getHeader = function (report, md) {
 
     // hard coded defaults for categories, and tags
     report.categories = 'misc';
@@ -152,7 +157,7 @@ exports.build = function (uri) {
 
         readMD(report).then(function (res) {
 
-            return getHeader(res.report,res.md);
+            return getHeader(res.report, res.md);
 
         }).then(function (report) {
 
