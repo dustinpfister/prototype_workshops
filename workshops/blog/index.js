@@ -39,7 +39,7 @@ var build = function (conf) {
             target_filepath = path.join(target, target_filename),
             html = marked(content);
 
-            ejs.renderFile('./theme/layout.ejs', {
+            ejs.renderFile(conf.layout, {
 
                 body: 'post.ejs',
                 content: html
@@ -79,7 +79,8 @@ if (require.main === module) {
     build({
 
         source: '../../source/_posts',
-        target: '../../html/'
+        target: '../../html/',
+        layout: './theme/layout.ejs'
 
     });
 
