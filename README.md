@@ -4,7 +4,7 @@ This is a prototype for an idea for a project that has to do with these things I
 
 ## What is a workshop?
 
-A workshop is a standard software component of a static site generator, that has tools that help with the production, and processing of some kind of content. It can be someting like a static site generator that takes content from a source, and produces static html in a target path. 
+A workshop is a standard software component of a static site generator, that has tools that help with the production, and processing of some kind of content. It can be something like a static site generator that takes content from a source, and produces static html in a target path. 
 
 ## It is a component of a static site generator
 
