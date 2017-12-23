@@ -85,6 +85,13 @@ var getHeader = function (report) {
 // set dates for report from header data, or fs.stats
 var setDates = function (report) {
 
+    // pad a number ( 2 to 02 )
+    var pad = function (n) {
+
+        return String('0' + n).slice(-2);
+
+    };
+
     return new Promise(function (resolve, reject) {
 
         fs.stat(report.uri, function (e, stat) {
@@ -106,6 +113,13 @@ var setDates = function (report) {
                 report.update = report.header.update || report.update;
 
             }
+
+            report.date = new Date(report.date);
+            report.update = new Date(report.update);
+
+            report.y = report.date.getFullYear();
+            report.m = pad(report.date.getMonth() + 1);
+            report.d = pad(report.date.getDate());
 
             resolve(report);
 

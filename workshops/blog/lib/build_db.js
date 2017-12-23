@@ -12,7 +12,7 @@ pat_md = /.md$/;
 var forEach = function (conf, content, fn, next) {
 
 
-    require('./read_md.js').build(fn).then(function (report) {
+    require('./md_report.js').build(fn).then(function (report) {
 
         console.log(report);
         next();
