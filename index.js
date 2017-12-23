@@ -9,6 +9,6 @@ ws.build({
     db: './workshops/blog/db.json',
 
     // page
-    perPage: 2
+    perPage: 5
 
 });

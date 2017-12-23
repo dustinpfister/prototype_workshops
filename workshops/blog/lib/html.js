@@ -15,7 +15,7 @@ _ = require('lodash'),
 
 log = function (mess) {
 
-    return console.log('html: ' + mess);
+    return console.log(mess);
 
 },
 
@@ -108,14 +108,24 @@ html.page = function (conf, db, done) {
     log('**********');
     log('building page path ');
 
-    // !! I am doing this here.
-    var posts = db.reports.sort();
+    // !! I am doing this here, it should be in build_db.js.
+    var posts = db.reports.sort(function (a, b) {
 
-    _.each(posts, function (post) {
+            return b.date - a.date;
 
-        console.log(post);
+        }).map(function(obj){ return {uri:obj.uri}}),
+		
+	pages = _.chunk(posts,conf.perPage || 2),
+	i=0, len = pages.length;
+	
+	while(i < len){
+		
+		log(pages[i]);
+		
+		i += 1;
+		
+	}
 
-    });
 
 };
 
