@@ -21,9 +21,9 @@ var readMD = function (report) {
             } else {
 
                 // raw md
-                report.md = md;
+                //report.md = md;
 
-                resolve(report);
+                resolve({report:report,md:md});
 
             }
 
@@ -35,7 +35,7 @@ var readMD = function (report) {
 
 // Set report.header to the parsed yaml, or false.
 // set relevant data from header, or defaults
-var getHeader = function (report) {
+var getHeader = function (report,md) {
 
     var pat_header = /---[\s|\S]*---/,
     pat_dash = /---/g;
@@ -46,13 +46,13 @@ var getHeader = function (report) {
 
     return new Promise(function (resolve, reject) {
 
-        if (!report.md) {
+        if (!md) {
 
-            reject(new Error('no markdown in given report object.'));
+            reject(new Error('no markdown given for report object.'));
 
         }
 
-        report.header = report.md.match(pat_header);
+        report.header = md.match(pat_header);
 
         // if header convert from yaml
         if (report.header) {
@@ -129,6 +129,7 @@ var setDates = function (report) {
             report.y = report.date.getFullYear();
             report.m = pad(report.date.getMonth() + 1);
             report.d = pad(report.date.getDate());
+            report.path = report.y + '/' + report.m + '/' + report.d;
 
             resolve(report);
 
@@ -149,9 +150,9 @@ exports.build = function (uri) {
 
     return new Promise(function (resolve, reject) {
 
-        readMD(report).then(function (report) {
+        readMD(report).then(function (res) {
 
-            return getHeader(report);
+            return getHeader(res.report,res.md);
 
         }).then(function (report) {
 

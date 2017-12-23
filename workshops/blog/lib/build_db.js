@@ -7,17 +7,20 @@ mkdirp = require('mkdirp'),
 path = require('path'),
 fs = require('fs'),
 
-pat_md = /.md$/;
+pat_md = /.md$/,
+
+reports = [];
 
 var forEach = function (conf, content, fn, next) {
 
-
     require('./md_report.js').build(fn).then(function (report) {
 
-        console.log(report);
+        console.log('have info for: ' + report.uri);
+        reports.push(report);
+
         next();
 
-    }).catch(function (e) {
+    }).catch (function (e) {
 
         console.log(e);
 
@@ -31,6 +34,10 @@ var forEach = function (conf, content, fn, next) {
 var build = function (conf) {
 
     // !! putting up with callback hell (for now)
+
+    console.log('building a database...');
+
+    reports = [];
 
     // read files in the source path
     dir.readFiles(conf.source, {
@@ -48,7 +55,8 @@ var build = function (conf) {
     }, function (err, files) {
 
         // when done
-        console.log('done');
+        console.log('writing post reprots to database...');
+        console.log(reports);
 
     });
 
