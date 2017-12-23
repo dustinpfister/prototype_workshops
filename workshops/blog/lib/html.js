@@ -113,19 +113,31 @@ html.page = function (conf, db, done) {
 
             return b.date - a.date;
 
-        }).map(function(obj){ return {uri:obj.uri}}),
-		
-	pages = _.chunk(posts,conf.perPage || 2),
-	i=0, len = pages.length;
-	
-	while(i < len){
-		
-		log(pages[i]);
-		
-		i += 1;
-		
-	}
+        }).map(function (obj) {
+            return {
+                uri: obj.uri
+            }
+        }),
 
+    pages = _.chunk(posts, conf.perPage || 2),
+    i = 0,
+    len = pages.length;
+
+    // loop
+    loop = function () {
+
+        log(pages[i]);
+
+        i += 1;
+        if (i < len) {
+
+            loop();
+
+        }
+
+    };
+
+    loop();
 
 };
 
