@@ -2,8 +2,19 @@
 <h1>This is a page</h1>
 <% posts.forEach(function(post){ %>
 
-
-    
-    </div><a href="<%= post.href%>"><%= post.path %></a> <div>
+    </div><a href="<%= post.href %>"><%= post.path %></a> <div>
 
 <% }); %>
+
+
+<% if(pageNum > 1){ %>
+
+    <a href="/page/<%= pageNum-1 %>">prev</a>
+
+<% } %>
+
+<% if(pageNum < posts.length){ %>
+
+    <a href="/page/<%= pageNum+1 %>">next</a>
+
+<% } %>

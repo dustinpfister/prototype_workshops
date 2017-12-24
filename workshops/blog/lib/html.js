@@ -45,6 +45,7 @@ html.post = function (conf, report, done) {
             ejs.renderFile(conf.layout, {
 
                 layout: 'post.ejs',
+                conf: conf,
                 content: html
 
             }, function (e, html) {
@@ -102,7 +103,7 @@ html.years = function (conf, db, done) {
 };
 
 // make a page
-let mkPage = function (conf, pageNum, posts, done) {
+let mkPage = function (conf, pageNum, pages, done) {
 
     done = done || function () {};
 
@@ -134,7 +135,9 @@ let mkPage = function (conf, pageNum, posts, done) {
 
             layout: 'page.ejs',
             pageNum: pageNum,
-            posts: posts
+            posts: pages[pageNum-1],
+			pages: pages,
+            conf: conf
 
         }, function (e, html) {
 
@@ -186,7 +189,7 @@ html.page = function (conf, db, done) {
     // loop
     loop = function () {
 
-        mkPage(conf, i + 1, pages[i], function () {
+        mkPage(conf, i + 1, pages, function () {
 
             i += 1;
             if (i < len) {

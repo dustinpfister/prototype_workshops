@@ -137,7 +137,7 @@ var setDates = function (conf, report) {
             report.d = pad(report.date.getDate());
             report.path = report.y + '/' + report.m + '/' + report.d;
 
-            report.href = path.join(conf.uri_post_base, report.path, report.fn, 'index.html');
+            report.href = path.join('/',report.path, report.fn, 'index.html');
 
             resolve(report);
 
