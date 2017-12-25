@@ -138,6 +138,7 @@ let mkPage = function (conf, pageNum, pages, done) {
 
         ejs.renderFile(conf.layout, _.merge(require('./api_ejs.js'), {
 
+                title: 'page ' + pageNum,
                 layout: 'page.ejs',
                 pageNum: pageNum,
                 posts: pages[pageNum - 1],
