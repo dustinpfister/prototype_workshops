@@ -9,6 +9,8 @@ var fs = require('fs'),
 yaml = require('js-yaml'),
 path = require('path'),
 
+api = require('./api'),
+
 pat_md = /.md$/,
 pat_header = /---[\s|\S]*---/,
 pat_dash = /---/g;
