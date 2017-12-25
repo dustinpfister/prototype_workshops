@@ -5,6 +5,8 @@
  *    an api to be used in my ejs templates
  *
  */
+ 
+ let api = require('./api');
 
  
 exports.foo = function () {
@@ -15,7 +17,9 @@ exports.foo = function () {
 
 exports.formatDate = function (date) {
 
-    return date.getFullYear() + ':' + date.getMonth() + ':' + date.getDate();
+    //return api.pad('2');
+
+    return date.getFullYear() + ':' + api.pad(date.getMonth()) + ':' + api.pad(date.getDate());
 
 };
 
