@@ -44,6 +44,7 @@ html.post = function (conf, report, done) {
 
             ejs.renderFile(conf.layout, {
 
+                title: report.title,
                 layout: 'post.ejs',
                 conf: conf,
                 content: html,
