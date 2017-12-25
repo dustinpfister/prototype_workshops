@@ -79,6 +79,8 @@ var getHeader = function (report, md) {
                 report.categories = report.header.categories || report.categories;
                 report.tags = report.header.tags || report.tags;
 
+                report.title = report.header.title || report.title;
+
             } catch (e) {
 
                 report.header = false;
