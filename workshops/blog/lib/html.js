@@ -42,14 +42,18 @@ html.post = function (conf, report, done) {
 
             let html = marked(md.replace(pat_header, ''));
 
-            ejs.renderFile(conf.layout, {
+            ejs.renderFile(conf.layout, _.merge(require('./api_ejs.js'), {
 
-                title: report.title,
-                layout: 'post.ejs',
-                conf: conf,
-                content: html,
+                    title: report.title,
+                    layout: 'post.ejs',
+                    report: report,
+                    pageNum: null,
+                    posts: [],
+                    pages: [],
+                    conf: conf,
+                    content: html,
 
-            }, function (e, html) {
+                }), function (e, html) {
 
                 // write the file
                 fs.writeFile(uri, html, 'utf-8', function (e) {

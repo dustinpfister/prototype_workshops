@@ -12,6 +12,14 @@ exports.foo = function () {
 
 };
 
+exports.postInfo = function(){
+	
+	return 'post info:'
+	
+	
+};
+
+
 exports.prevNextDiv = function () {
 
     let html = '<div>';
