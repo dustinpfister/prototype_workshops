@@ -131,15 +131,15 @@ let mkPage = function (conf, pageNum, pages, done) {
 
         }
 
-        ejs.renderFile(conf.layout, _.merge(  require('./api_ejs.js') ,{
+        ejs.renderFile(conf.layout, _.merge(require('./api_ejs.js'), {
 
-            layout: 'page.ejs',
-            pageNum: pageNum,
-            posts: pages[pageNum-1],
-			pages: pages,
-            conf: conf
+                layout: 'page.ejs',
+                pageNum: pageNum,
+                posts: pages[pageNum - 1],
+                pages: pages,
+                conf: conf
 
-        }), function (e, html) {
+            }), function (e, html) {
 
             if (e) {
 

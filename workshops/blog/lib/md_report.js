@@ -29,6 +29,9 @@ var readMD = function (report) {
                 // filename ( '/foo/bar.md' => 'bar' )
                 report.fn = path.basename(report.uri).replace(pat_md, '');
 
+                // default to untitled for the title of the post
+                report.title = 'untitled';
+
                 resolve({
                     report: report,
                     md: md
@@ -137,7 +140,7 @@ var setDates = function (conf, report) {
             report.d = pad(report.date.getDate());
             report.path = report.y + '/' + report.m + '/' + report.d;
 
-            report.href = path.join('/',report.path, report.fn, 'index.html');
+            report.href = path.join('/', report.path, report.fn, 'index.html');
 
             resolve(report);
 
