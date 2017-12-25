@@ -11,7 +11,9 @@ var dir = require('node-dir'),
 fs = require('fs'),
 _ = require('lodash'),
 
-pat_md = /.md$/,
+api = require('./api'),
+
+//pat_md = /.md$/,
 
 reports = [];
 
@@ -51,7 +53,7 @@ var buildDB = function (conf, done) {
         // options for node-dir readFiles
 
         // match only markdown
-        match: pat_md
+        match: api.pat.md
 
     }, function (err, content, fn, next) {
 
