@@ -6,19 +6,24 @@
  *
  */
 
+ 
 exports.foo = function () {
 
     console.log(this);
 
 };
 
-exports.postInfo = function(){
-	
-	return 'post info:'
-	
-	
+exports.formatDate = function (date) {
+
+    return date.getFullYear() + ':' + date.getMonth() + ':' + date.getDate();
+
 };
 
+exports.postInfo = function () {
+
+    return this.formatDate(this.report.date);
+
+};
 
 exports.prevNextDiv = function () {
 
