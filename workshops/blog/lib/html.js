@@ -46,7 +46,7 @@ html.post = function (conf, report, done) {
 
                 layout: 'post.ejs',
                 conf: conf,
-                content: html
+                content: html,
 
             }, function (e, html) {
 
@@ -131,7 +131,7 @@ let mkPage = function (conf, pageNum, pages, done) {
 
         }
 
-        ejs.renderFile(conf.layout, {
+        ejs.renderFile(conf.layout, _.merge(  require('./api_ejs.js') ,{
 
             layout: 'page.ejs',
             pageNum: pageNum,
@@ -139,7 +139,7 @@ let mkPage = function (conf, pageNum, pages, done) {
 			pages: pages,
             conf: conf
 
-        }, function (e, html) {
+        }), function (e, html) {
 
             if (e) {
 
