@@ -11,12 +11,8 @@ path = require('path'),
 
 api = require('./api'),
 
-pat_md = /.md$/,
-pat_header = /---[\s|\S]*---/,
-pat_dash = /---/g;
-
 // read markdown at report.uri, append some values to report object, and pass both in a new object
-var readMD = function (report) {
+readMD = function (report) {
 
     return new Promise(function (resolve, reject) {
 
@@ -29,7 +25,7 @@ var readMD = function (report) {
             } else {
 
                 // filename ( '/foo/bar.md' => 'bar' )
-                report.fn = path.basename(report.uri).replace(pat_md, '');
+                report.fn = path.basename(report.uri).replace(api.pat.md, '');
 
                 // default to untitled for the title of the post
                 report.title = 'untitled';
@@ -63,7 +59,7 @@ var getHeader = function (report, md) {
 
         }
 
-        report.header = md.match(pat_header);
+        report.header = md.match(api.pat.header);
 
         // if header convert from yaml
         if (report.header) {
@@ -72,7 +68,7 @@ var getHeader = function (report, md) {
             try {
 
                 // remove ---
-                report.header = report.header[0].replace(pat_dash, '');
+                report.header = report.header[0].replace(api.pat.dash, '');
 
                 // try to load
                 report.header = yaml.safeLoad(report.header);
