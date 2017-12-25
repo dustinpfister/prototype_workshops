@@ -6,25 +6,9 @@ build = function (conf, done) {
 
     done = done || function () {};
 
-    // build the database
-    require('./lib/build_db.js').build(conf, function (db) {
+    console.log('indexer');
 
-        // build posts
-        html.years(conf, db, function () {
-
-            console.log('ready to build pages');
-
-            html.page(conf, db, function () {
-
-                console.log('blog workshop is done.');
-
-                done();
-
-            });
-
-        });
-
-    });
+    html.index(conf, done);
 
 };
 
@@ -38,10 +22,6 @@ if (require.main === module) {
         source: '../../source/_posts',
         target: '../../html/',
         layout: './theme/layout.ejs',
-        db: './db.json',
-        uri_base: '../',
-        // page
-        perPage: 4
 
     });
 

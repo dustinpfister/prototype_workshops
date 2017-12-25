@@ -1,16 +1,27 @@
 
-// for now just call the blog workshop like this:
-var ws = require('./workshops/blog/index.js');
-ws.build({
+let conf = {
 
     source: './source/_posts',
     target: './html',
     layout: './workshops/blog/theme/layout.ejs',
     db: './workshops/blog/db.json',
 
-    uri_post_base : '../',
+    uri_post_base: '../',
 
     // page
     perPage: 5
+
+};
+
+// build blog
+require('./workshops/blog/index.js').build(conf, function () {
+
+    conf.layout = './workshops/indexer/theme/layout.ejs'
+
+    require('./workshops/indexer/index.js').build(conf, function () {
+
+        console.log('done with index');
+
+    });
 
 });

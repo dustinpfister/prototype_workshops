@@ -201,6 +201,10 @@ html.page = function (conf, db, done) {
 
                 loop();
 
+            } else {
+
+                done();
+
             }
 
         });
