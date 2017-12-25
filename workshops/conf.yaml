@@ -1,0 +1,5 @@
+nav:
+    home : /
+    blog : /page
+prebuild:
+    indexer : prebuild.js

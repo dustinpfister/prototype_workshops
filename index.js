@@ -6,7 +6,15 @@ let conf = {
     layout: './workshops/blog/theme/layout.ejs',
     db: './workshops/blog/db.json',
 
-    uri_post_base: '../',
+    //uri_post_base: '../',
+
+	str: 'hello?',
+    nav: {
+
+        home: '/',
+        blog: '/page'
+
+    },
 
     // page
     perPage: 5
@@ -16,7 +24,7 @@ let conf = {
 // build blog
 require('./workshops/blog/index.js').build(conf, function () {
 
-    conf.layout = './workshops/indexer/theme/layout.ejs'
+    conf.layout = './workshops/indexer/theme/layout.ejs';
 
     require('./workshops/indexer/index.js').build(conf, function () {
 
