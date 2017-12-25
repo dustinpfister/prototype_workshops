@@ -13,17 +13,16 @@ fs = require('fs'),
 ejs = require('ejs'),
 _ = require('lodash'),
 
+// add api.js
+api = require('./api'),
+
 log = function (mess) {
 
     return console.log(mess);
 
 },
 
-pat_md = /.md$/,
-pat_header = /---[\s|\S]*---/,
-pat_dash = /---/g;
-
-let html = {};
+html = {};
 
 // write a *.html file for a blog post at conf.target/yyyy/mm/dd/[md-filename]
 html.post = function (conf, report, done) {
@@ -40,7 +39,7 @@ html.post = function (conf, report, done) {
 
         fs.readFile(report.uri, 'utf-8', function (e, md) {
 
-            let html = marked(md.replace(pat_header, ''));
+            let html = marked(md.replace(api.pat.header, ''));
 
             ejs.renderFile(conf.layout, _.merge(require('./api_ejs.js'), {
 
