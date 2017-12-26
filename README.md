@@ -40,7 +40,7 @@ This is the current version I am developing
 * new lib folder at /
 * added crawl.js in root /lib that crawls /workshops path and reads conf.yaml files.
 * improved build process using crawl.js
-
+* added a css workshop that just copy's over a css file from source to the target for now.
 
 ### Planed.
 
