@@ -18,7 +18,7 @@ A local theme is a theme that is included with a workshop. This theme should be 
 
 This is whats out so far with this.
 
-[0.0.47](https://github.com/dustinpfister/prototype_workshops/tree/0.0.47) - Alpha I - Blog workshop started
+[0.0.47 - Alpha I - Blog workshop started](https://github.com/dustinpfister/prototype_workshops/tree/0.0.47)
 
 * started work on my first workshop 'blog'
 * local theme folder for blog workshop
@@ -29,18 +29,24 @@ This is whats out so far with this.
 * /page path generated in public html folder.
 * started using hapi 16.x as a back end framework, currently just as a static server.
 
-### current
-
-This is the current version I am developing
-
-0.1.x - Alpha II - indexer workshop
+[0.1.18 - Alpha II - indexer workshop](https://github.com/dustinpfister/prototype_workshops/tree/0.1.18)
 
 * new workshop that builds the main index.html at the site root.
 * builds the main navigation menu that will be used site wide.
 * new lib folder at /
 * added crawl.js in root /lib that crawls /workshops path and reads conf.yaml files.
+* conf.yaml files for workshops
 * improved build process using crawl.js
 * added a css workshop that just copy's over a css file from source to the target for now.
+
+### current
+
+This is the current version I am developing not all features listed may be working yet.
+
+0.2.x - Alpha III - Lexter
+
+* lexter: a new lexical analyses workshop that builds reports based on the text content of the site.
+* lexter should have the lowest rank, even after index.
 
 ### Planed.
 
@@ -53,7 +59,6 @@ x.x.x - Global themes
 
 x.x.x - Conf.yaml
 
-* conf.yaml files for workshops for configuring a single workshop.
 * conf.yaml file for /workshops path for setting values like workshop priority (which should build first)
 * conf.yaml file for / path to set site wide values.
 
@@ -63,9 +68,6 @@ x.x.x - jimpster
 
 * jimpster: a new workshop that will build a gallery using images in a source folder.
 
-x.x.x - Lexter
-
-* lexter: a new lexical analyses workshop that builds reports based on the text content of the site.
 
 x.x.x - forFrame
 
@@ -83,3 +85,7 @@ x.x.x - blogger-idle
 * the player starts out being someone that writes low rank content
 * as the player progresses they unlock the ability to write better content.
 * plays just like a typical idle game
+
+x.x.x - workspaces
+
+* a workshop can provide something called a workspace that is a special full stack application that is used for development of content. For example the blog workshop can provide a workspace that is a text editor. Changes made in the workspace can be posted to a back end and then saved to a source folder.

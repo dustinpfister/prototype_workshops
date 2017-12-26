@@ -1,0 +1,6 @@
+active: true
+rank: 1
+nav:
+  - label : lexter
+    href : /lexter
+    rank : 0
