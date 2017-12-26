@@ -3,11 +3,25 @@
 <head>
     <title><%= title %></title>
     <meta chartset="utf-8 " />
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
-<%- include('./nav.ejs') %>
-<%- include('./layouts/' + layout) %>
+<div class="wrap_main">
+
+    <div class="wrap_header">
+        <h1>WorkShops</h1>
+        <div class="wrap_navbar">
+            <%- include('./nav.ejs') %>
+        </div>
+    </div>
+
+    <div class="warp_content">
+        <%- include('./layouts/' + layout) %>
+    </div>
+
+</div>
+
 
 </body>
 </html>
