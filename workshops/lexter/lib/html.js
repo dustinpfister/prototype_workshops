@@ -70,10 +70,39 @@ exports.each = function (conf, reports, done) {
 
                 }
 
-                console.log('uri: ' + uri);
+                //console.log('uri: ' + uri);
 
-                i += 1;
-                loop();
+                ejs.renderFile(conf.layout, {
+
+                    title: 'lexter',
+                    layout: 'lexter_each.ejs',
+                    report: report,
+                    conf: conf,
+
+                }, function (err, html) {
+
+                    if (err) {
+
+                        console.log(err);
+
+                    }
+
+                    let uri_file = path.join(uri, path.basename(report.href));
+
+                    fs.writeFile(uri_file, html, 'utf-8', function (err) {
+
+                        if (err) {
+
+                            console.log(err);
+
+                        }
+
+                        i += 1;
+                        loop();
+
+                    });
+
+                });
 
             });
 
