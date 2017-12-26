@@ -21,3 +21,5 @@ nav:
 
 theme:
     layout : ./workshops/blog/theme/layout.ejs
+
+source: ./source/_posts

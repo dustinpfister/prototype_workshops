@@ -47,6 +47,7 @@ require('./lib/crawl.js').crawl().then(function (report) {
     next = function () {
 
         conf.layout = ws.theme.layout;
+        conf.source = ws.source;
 
         require('./workshops/' + report.ws[i].name + '/index.js').build(conf, onDone);
 

@@ -1,0 +1,33 @@
+body{
+
+    margin:0px;
+
+}
+
+.red{
+
+    color: red;
+
+}
+
+.wrap_header{
+
+    display:inline-block;
+    text-align:center;
+    width: 100%;
+    height: 120px;
+
+}
+
+.wrap_navbar{
+
+    width: 100%;
+    text-align:center;
+    font:20px courier;
+
+}
+
+
+a:link{color:#af0000;}
+a:visited{color:#af0000;}
+a:hover{color:#ff0000;}
