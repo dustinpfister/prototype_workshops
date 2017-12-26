@@ -43,12 +43,17 @@ exports.build = function (conf, done) {
 
     }, function () {
 
+	    reports.sort(function(a,b){
+			
+			return b.wordCount - a.wordCount;
+			
+		});
+	
         mkdirp(path.join(conf.target, 'lexter'), function (e) {
 
             let uri = path.join(conf.target, 'lexter', 'index.html'),
             html = '<h1>lexter</h1>';
 
-			//html +=  + '<br>'
             reports.forEach(function (report) {
 
                 html += 'file: <a href="'+report.filename+'">' + report.filename + '<\/a><br>';
