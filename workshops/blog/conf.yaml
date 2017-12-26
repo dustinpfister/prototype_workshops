@@ -12,5 +12,7 @@ rank: 1
 
 # navigation info (label: path)
 
-nav :
-   blog: /page
+nav:
+  - label : blog
+    href : /page
+    rank : 0

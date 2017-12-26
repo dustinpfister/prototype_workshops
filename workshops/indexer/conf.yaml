@@ -1,2 +1,6 @@
 active: true
 rank: 0
+nav:
+  - label : home
+    href : /
+    rank : 100
