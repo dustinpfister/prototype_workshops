@@ -47,6 +47,7 @@ This is the current version I am developing not all features listed may be worki
 
 * lexter: a new lexical analyses workshop that builds reports based on the text content of the site.
 * lexter should have the lowest rank, even after index.
+* word count reports working
 
 ### Planed.
 
