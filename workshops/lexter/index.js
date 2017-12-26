@@ -1,5 +1,6 @@
 
-let dir = require('node-dir');
+let dir = require('node-dir'),
+cheerio = require('cheerio');
 
 exports.build = function (conf, done) {
 
@@ -11,8 +12,17 @@ exports.build = function (conf, done) {
 
     }, function (err, content, filename, next) {
 
-        console.log('lexter: ' + filename);
-		console.log(content);
+        let $ = cheerio.load(content);
+
+        if ($('p').length > 0) {
+
+            console.log('********** **********');
+            console.log(filename);
+            console.log('---------- ----------');
+            console.log($('p').text());
+            console.log('********** **********');
+
+        }
 
         next();
 
