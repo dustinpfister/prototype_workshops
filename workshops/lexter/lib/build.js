@@ -59,7 +59,7 @@ exports.buildReports = function (conf, done) {
 
             let report = {};
 
-            report.filename = filename.replace(path.basename(conf.target), '');
+            report.href = filename.replace(path.basename(conf.target), '');
             report.wordCount = $('p').text().split(' ').length;
 
             reports.push(report);
