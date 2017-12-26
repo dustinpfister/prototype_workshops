@@ -4,3 +4,5 @@ nav:
   - label : home
     href : /
     rank : 100
+theme:
+    layout : ./workshops/indexer/theme/layout.ejs
