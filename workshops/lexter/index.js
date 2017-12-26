@@ -44,7 +44,15 @@ exports.build = function (conf, done) {
         mkdirp(path.join(conf.target, 'lexter'), function (e) {
 
             let uri = path.join(conf.target, 'lexter', 'index.html'),
-            html = 'lexter';
+            html = '<h1>lexter</h1>';
+
+            reports.forEach(function (report) {
+
+                html += 'file: ' + report.filename + '<br>';
+                html += 'wordCount: ' + report.wordCount + '<br>';
+                html += '<br><br>';
+
+            });
 
             fs.writeFile(uri, html, 'utf-8', function () {
 
