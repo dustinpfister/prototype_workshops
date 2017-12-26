@@ -22,21 +22,7 @@ let conf = {
 
 };
 
-// build blog
-/*
-require('./workshops/blog/index.js').build(conf, function () {
-
-conf.layout = './workshops/indexer/theme/layout.ejs';
-
-require('./workshops/indexer/index.js').build(conf, function () {
-
-console.log('done with index');
-
-});
-
-});
- */
-
+// build workshops
 require('./lib/crawl.js').crawl().then(function (report) {
 
     let i = 0,
@@ -65,6 +51,9 @@ require('./lib/crawl.js').crawl().then(function (report) {
         require('./workshops/' + report.ws[i].name + '/index.js').build(conf, onDone);
 
     };
+
+    // merge down for conf
+    conf = _.merge(conf, report.conf);
 
     next();
 

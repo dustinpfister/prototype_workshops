@@ -38,7 +38,8 @@ This is the current version I am developing
 * new workshop that builds the main index.html at the site root.
 * builds the main navigation menu that will be used site wide.
 * new lib folder at /
-* need a global level script that provides a central build process.
+* added crawl.js in root /lib that crawls /workshops path and reads conf.yaml files.
+* improved build process using crawl.js
 
 
 ### Planed.

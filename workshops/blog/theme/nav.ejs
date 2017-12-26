@@ -1,4 +1,5 @@
+<% conf.nav_data.forEach(function(nav){ %>
 
-<% for(var prop in conf.nav){ %>
-    <a href="<%= conf.nav[prop] %>"><%= prop %></a>
-<% } %>
+    <a href="<%= nav.href %>"><%= nav.label %></a>
+
+<% }); %>
