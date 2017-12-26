@@ -19,7 +19,7 @@ exports.formatDate = function (date) {
 
     //return api.pad('2');
 
-    return date.getFullYear() + ':' + api.pad(date.getMonth()) + ':' + api.pad(date.getDate());
+    return date.getFullYear() + ':' + api.pad(date.getMonth()+1) + ':' + api.pad(date.getDate());
 
 };
 

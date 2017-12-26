@@ -190,6 +190,9 @@ html.page = function (conf, db, done) {
     pages = _.chunk(posts, conf.perPage || 2),
     i = 0,
     len = pages.length;
+	
+	console.log('pages');
+	console.log(pages);
 
     // loop
     loop = function () {
