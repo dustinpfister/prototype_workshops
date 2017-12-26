@@ -1,7 +1,7 @@
 active: true
 rank: 0
 nav:
-  - label : home
+  - label : root
     href : /
     rank : 100
 theme:

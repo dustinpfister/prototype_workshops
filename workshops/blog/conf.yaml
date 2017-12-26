@@ -13,7 +13,7 @@ rank: 100
 # navigation info (label: path)
 
 nav:
-  - label : blog
+  - label : words
     href : /page
     rank : 0
 
