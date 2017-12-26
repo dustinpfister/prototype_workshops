@@ -9,7 +9,7 @@ path = require('path'),
 fs = require('fs'),
 mkdirp = require('mkdirp');
 
-
+// the main index at /lexter/index.html
 exports.index = function (conf, reports, done) {
 
     mkdirp(path.join(conf.target, 'lexter'), function (e) {
@@ -46,5 +46,45 @@ exports.index = function (conf, reports, done) {
         });
 
     });
+
+};
+
+// builds the each path at /lexter/each
+exports.each = function (conf, reports, done) {
+
+    let i = 0,
+    len = reports.length,
+
+    loop = function () {
+
+        if (i < len) {
+
+            let report = reports[i],
+            uri = path.join(conf.target, 'lexter', 'each', path.dirname(report.href));
+
+            mkdirp(uri, function (e) {
+
+                if (e) {
+
+                    console.log(e);
+
+                }
+
+                console.log('uri: ' + uri);
+
+                i += 1;
+                loop();
+
+            });
+
+        } else {
+
+            done();
+
+        }
+
+    };
+
+    loop();
 
 };
