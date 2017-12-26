@@ -11,6 +11,8 @@ exports.build = function (conf, done) {
 
     let reports = [];
 
+	//process.chdir(conf.target);
+	
     dir.readFiles(conf.target, {
 
         match: /.html$/
@@ -24,7 +26,7 @@ exports.build = function (conf, done) {
 
             let report = {};
 
-            report.filename = filename;
+            report.filename = filename.replace(path.basename(conf.target),'')
             report.wordCount = $('p').text().split(' ').length;
 
             reports.push(report);
@@ -46,9 +48,10 @@ exports.build = function (conf, done) {
             let uri = path.join(conf.target, 'lexter', 'index.html'),
             html = '<h1>lexter</h1>';
 
+			//html +=  + '<br>'
             reports.forEach(function (report) {
 
-                html += 'file: ' + report.filename + '<br>';
+                html += 'file: <a href="'+report.filename+'">' + report.filename + '<\/a><br>';
                 html += 'wordCount: ' + report.wordCount + '<br>';
                 html += '<br><br>';
 
