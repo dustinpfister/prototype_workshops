@@ -3,7 +3,50 @@ let dir = require('node-dir'),
 mkdirp = require('mkdirp'),
 fs = require('fs'),
 path = require('path'),
-cheerio = require('cheerio');
+cheerio = require('cheerio'),
+
+ejs = require('ejs');
+
+let html = {};
+
+html.index = function (conf, reports, done) {
+
+    mkdirp(path.join(conf.target, 'lexter'), function (e) {
+
+        ejs.renderFile(conf.layout, {
+
+            title: 'lexter',
+            layout: 'lexter_index.ejs',
+            reports: reports,
+            conf: conf,
+
+        }, function (err, html) {
+
+            if (err) {
+
+                console.log(err);
+
+            }
+
+            let uri = path.join(conf.target, 'lexter', 'index.html');
+
+            fs.writeFile(uri, html, 'utf-8', function (err) {
+
+                if (err) {
+
+                    console.log(err);
+
+                }
+
+                done();
+
+            });
+
+        });
+
+    });
+
+};
 
 exports.build = function (conf, done) {
 
@@ -11,8 +54,8 @@ exports.build = function (conf, done) {
 
     let reports = [];
 
-	//process.chdir(conf.target);
-	
+    //process.chdir(conf.target);
+
     dir.readFiles(conf.target, {
 
         match: /.html$/
@@ -26,16 +69,16 @@ exports.build = function (conf, done) {
 
             let report = {};
 
-            report.filename = filename.replace(path.basename(conf.target),'')
+            report.filename = filename.replace(path.basename(conf.target), '');
             report.wordCount = $('p').text().split(' ').length;
 
             reports.push(report);
 
-            console.log('********** **********');
-            console.log(filename);
-            console.log('---------- ----------');
-            console.log($('p').text());
-            console.log('********** **********');
+            //console.log('********** **********');
+            //console.log(filename);
+            //console.log('---------- ----------');
+            //console.log($('p').text());
+            //console.log('********** **********');
 
         }
 
@@ -43,32 +86,36 @@ exports.build = function (conf, done) {
 
     }, function () {
 
-	    reports.sort(function(a,b){
-			
-			return b.wordCount - a.wordCount;
-			
-		});
-	
-        mkdirp(path.join(conf.target, 'lexter'), function (e) {
+        reports.sort(function (a, b) {
 
-            let uri = path.join(conf.target, 'lexter', 'index.html'),
-            html = '<h1>lexter</h1>';
-
-            reports.forEach(function (report) {
-
-                html += 'file: <a href="'+report.filename+'">' + report.filename + '<\/a><br>';
-                html += 'wordCount: ' + report.wordCount + '<br>';
-                html += '<br><br>';
-
-            });
-
-            fs.writeFile(uri, html, 'utf-8', function () {
-
-                done();
-
-            });
+            return b.wordCount - a.wordCount;
 
         });
+
+        html.index(conf, reports, done);
+
+        /*
+        mkdirp(path.join(conf.target, 'lexter'), function (e) {
+
+        let uri = path.join(conf.target, 'lexter', 'index.html'),
+        html = '<h1>lexter</h1>';
+
+        reports.forEach(function (report) {
+
+        html += 'file: <a href="' + report.filename + '">' + report.filename + '<\/a><br>';
+        html += 'wordCount: ' + report.wordCount + '<br>';
+        html += '<br><br>';
+
+        });
+
+        fs.writeFile(uri, html, 'utf-8', function () {
+
+        done();
+
+        });
+
+        });
+         */
 
     });
 

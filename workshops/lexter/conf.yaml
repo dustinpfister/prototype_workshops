@@ -4,3 +4,5 @@ nav:
   - label : lexter
     href : /lexter
     rank : 0
+theme:
+    layout : ./workshops/lexter/theme/layout.ejs

@@ -1,0 +1,18 @@
+<h1>Lexter</h1>
+
+<div class="wrap_word_count">
+
+    <h2>files by word count: </h2>
+    <% reports.forEach(function(report,index){ %>
+
+        <ul>
+
+            <li>#<%= index + 1 %></li>
+            <li>file: <a href="<%= report.filename %>"><%= report.filename %></a></li>
+            <li>word count: <%= report.wordCount %></li>
+
+        </ul>
+
+    <% }); %>
+
+</div>
