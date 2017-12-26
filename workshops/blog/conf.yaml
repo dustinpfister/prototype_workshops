@@ -1,2 +1,16 @@
+
+# The active property means that this workshop will be used
+# in the build process. Setting to false is a way to disable
+# the workshop
+
 active: true
+
+# rank indicates if this workshop should be built sooner or later 
+# in the build process. A higher value means it should be done first
+
 rank: 1
+
+# navigation info (label: path)
+
+nav :
+   blog: /page
