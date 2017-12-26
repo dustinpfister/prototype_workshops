@@ -8,7 +8,6 @@ let conf = {
 
     //uri_post_base: '../',
 
-	str: 'hello?',
     nav: {
 
         home: '/',
