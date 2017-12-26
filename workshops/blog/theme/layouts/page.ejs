@@ -1,10 +1,18 @@
-<h1><%= title %></h1>
-<% posts.forEach(function(post){ %>
 
-    </div><a href="<%= post.href %>"><%= post.path %></a> <div>
+<div class="wrap_post_index">
 
-<% }); %>
+    <h1><%= title %></h1>
 
+    <% posts.forEach(function(post){ %>
 
-<%- prevNextDiv() %>
+        <div class="post_card">
 
+            <a href="<%= post.href %>"><%= post.title %></a>
+
+        </div>
+
+    <% }); %>
+
+    <%- prevNextDiv() %>
+
+</div>
