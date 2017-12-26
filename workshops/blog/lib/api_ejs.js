@@ -55,11 +55,8 @@ exports.prevNextDiv = function () {
 
     }
 
-    //return this.pageNum;
-
     return html + '</div>';
 
-    //return html + '<\/div>';
 
 }
 

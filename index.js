@@ -18,7 +18,7 @@ let conf = {
     },
 
     // page
-    perPage: 5
+    perPage: 4
 
 };
 
