@@ -20,27 +20,28 @@ let conf = {
 
 };
 
-/*
 // build blog
+/*
 require('./workshops/blog/index.js').build(conf, function () {
 
-conf.layout = './workshops/indexer/theme/layout.ejs';
+    conf.layout = './workshops/indexer/theme/layout.ejs';
 
-require('./workshops/indexer/index.js').build(conf, function () {
+    require('./workshops/indexer/index.js').build(conf, function () {
 
-console.log('done with index');
+        console.log('done with index');
+
+    });
 
 });
-
-});
- */
+*/
 
 require('./lib/crawl.js').crawl().then(function (files) {
 
-    console.log(files);
+console.log(files);
 
 }).catch (function (err) {
 
-    console.log(err);
+console.log(err);
 
 });
+
