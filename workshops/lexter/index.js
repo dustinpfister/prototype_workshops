@@ -12,6 +12,7 @@ exports.build = function (conf, done) {
     }, function (err, content, filename, next) {
 
         console.log('lexter: ' + filename);
+		console.log(content);
 
         next();
 
