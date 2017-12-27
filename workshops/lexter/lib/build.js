@@ -9,6 +9,16 @@ path = require('path'),
 natural = require('natural'),
 dir = require('node-dir');
 
+/* find if a test path is a sub path of another root path
+https://stackoverflow.com/questions/37521893/determine-if-a-path-is-subdirectory-of-another-in-node-js
+ */
+let isSub = function (rootPath, testPath) {
+
+    let relative = path.relative(rootPath, testPath);
+    return !!relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+
+};
+
 // read the whole target path in conf.target, and runt the forFile method for each file found
 let readTarget = function (conf, forFile) {
 
@@ -16,8 +26,7 @@ let readTarget = function (conf, forFile) {
 
         dir.readFiles(conf.target, {
 
-            match: /.html$/,
-            excludeDir: /lexter/
+            match: /.html$/
 
         }, function (err, content, filename, next) {
 
@@ -27,11 +36,22 @@ let readTarget = function (conf, forFile) {
 
             }
 
-            forFile(err, content, filename, function () {
+            if (isSub(path.join(conf.target, 'lexter'), filename)) {
 
+                // if a sub dir of conf.target/lexter
+                // just continue
                 next();
 
-            });
+            } else {
+
+                // call the forFile method
+                forFile(err, content, filename, function () {
+
+                    next();
+
+                });
+
+            }
 
         }, function () {
 
