@@ -15,7 +15,8 @@ let readTarget = function (conf, forFile) {
 
         dir.readFiles(conf.target, {
 
-            match: /.html$/
+            match: /.html$/,
+            excludeDir: /lexter/
 
         }, function (err, content, filename, next) {
 
