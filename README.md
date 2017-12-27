@@ -93,3 +93,60 @@ x.x.x - blogger-idle
 x.x.x - workspaces
 
 * a workshop can provide something called a workspace that is a special full stack application that is used for development of content. For example the blog workshop can provide a workspace that is a text editor. Changes made in the workspace can be posted to a back end and then saved to a source folder.
+
+## core improvements
+
+x.x.x - build api
+
+when the build method of a workshop is called, an api that contains common suspects exsists  that can be used via the this keyword. An example of what I am talking about here is the use of this.log that exists now (as of 0.3.x).
+
+```js
+exports.build = function(){
+
+   this.log('building the workshop');
+   
+   let reports = getReports();
+   
+   this.renderFile({
+   
+        target: path.join(this.conf.target, 'lexter', 'index.html'),
+        conf: this.conf,
+        ejsData : {
+            title: 'lexter',
+            layout: 'lexter_index.ejs',
+            reports: reports,
+            conf: this.conf,
+        },
+        done: this.done
+   
+   });
+   
+};
+```
+
+As I keep writing more workshops it looks like there are things that keep coming up again, and again. That kind of something should be part of an api that can be called inside the body of a build method of a workshop.
+
+x.x.x - db method in index.js of workshops
+
+workshops should move in the direction of having a process in which databases are built, and or updated prier to the build process. The way things are going now is a little weird.
+
+```js
+exports.db = function(conf,done){
+
+    // do what needs to be done for the
+    // database file associated with
+    // this workshop here
+
+    done();
+
+}
+
+exports.build = function(conf,done){
+ 
+   // do what needs to get done to
+   // build a part of the site that 
+   // the workshop is responsible for here
+ 
+   done();
+}
+```
