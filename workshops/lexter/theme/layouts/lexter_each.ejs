@@ -1,17 +1,21 @@
 
 <div class="wrap_lexter">
 
-    <h1>Lexter Page Report</h1>
+    <h1>Lexter Page Report for: <a href="<%= report.href %>"><%= report.href %></a></h1>
 
+    <h3>Basic info:</h3>
+    <ul>
+        <li>word count: <%= report.wordCount %></li>
+        <li>href: <%= report.href %></li>
+        <li><a href="<%= report.href %>">link to page</a></li>
+    </ul>
 
-    <h2>report for page at:  <a href="<%= report.href %>"><%= report.href %></a></h2>
-
+    <h3>Misc:</h3>
     <ul>
 
         <li>href: <a href="<%= report.href %>"><%= report.href %></a></li>
         <li>text: <%= report.text %></li>
         <li>tokens: <%= report.tokens %></li>
-        <li>word count: <%= report.wordCount %></li>
 
     </ul>
 
