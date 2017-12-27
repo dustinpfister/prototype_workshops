@@ -3,7 +3,12 @@
 
     <h1>Lexter Page Reports Index</h1>
 
+    <ul>
+    <% reports.forEach(function(report){ %>
 
-    <p>Oh man is this some work</p>
+        <li><a href="<%= '/lexter/each' + report.href %>"><%= '/lexter/each' + report.href %></a></li>
+
+    <% }); %>
+    </ul>
 
 </div>
