@@ -39,15 +39,23 @@ This is whats out so far with this.
 * improved build process using crawl.js
 * added a css workshop that just copy's over a css file from source to the target for now.
 
-### current
-
-This is the current version I am developing not all features listed may be working yet.
-
-0.2.x - Alpha III - Lexter
+[0.2.32 - Alpha III - Lexter](https://github.com/dustinpfister/prototype_workshops/tree/0.2.32)
 
 * lexter: a new lexical analyses workshop that builds reports based on the text content of the site.
 * lexter should have the lowest rank, even after index.
 * word count reports working
+* each path for reports on each page that lexter reports on.
+* started using [lowdb](https://www.npmjs.com/package/lowdb) for databases.
+* using the npm package [natural](https://www.npmjs.com/package/natural) for some lexical analyses tools.
+
+### current
+
+This is the current version I am developing not all features listed may be working yet.
+
+0.3.x - Alpha IV - jimpster
+
+* jimpster: a new workshop that will build a gallery using images in a source folder.
+
 
 ### Planed.
 
@@ -65,18 +73,13 @@ x.x.x - Conf.yaml
 
 ### workshop ideas
 
-x.x.x - jimpster
-
-* jimpster: a new workshop that will build a gallery using images in a source folder.
-
-
 x.x.x - forFrame
 
 * forframe: New workshop that can be used to make simple little animations as a kind of content for a site.
 
-x.x.x - blastem
+x.x.x - blast_them
 
-* blastem : a workshop centered around making phaser.js games as a kind of site content.
+* blast_them : a workshop centered around making phaser.js games as a kind of site content.
 
 x.x.x - blogger-idle
 
