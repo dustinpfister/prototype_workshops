@@ -23,9 +23,16 @@ body{
 .post_card{
 
     margin:20px;
-	padding:20px;
+    padding:20px;
     border: 1px dotted #000000;
-	min-height:50px;
+    min-height:50px;
+
+}
+
+.wrap_lexter{
+
+    width: 80%;
+    margin-left: 10%;
 
 }
 
