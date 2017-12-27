@@ -49,7 +49,28 @@ require('./lib/crawl.js').crawl().then(function (report) {
         conf.layout = ws.theme.layout;
         conf.source = ws.source;
 
-        require('./workshops/' + report.ws[i].name + '/index.js').build(conf, onDone);
+        let ws_index = require('./workshops/' + report.ws[i].name + '/index.js');
+
+        ws_index.build.call({
+
+            wsName: report.ws[i].name,
+
+            log: function (mess) {
+
+                if (typeof mess === 'string') {
+
+                    console.log(this.wsName + ' : ' + mess);
+
+                } else {
+
+                    console.log(this.wsName + ' :');
+                    console.log(mess);
+                    console.log('********** **********');
+                }
+
+            }
+
+        }, conf, onDone);
 
     };
 
