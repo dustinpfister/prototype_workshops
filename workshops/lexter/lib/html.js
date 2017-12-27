@@ -9,19 +9,19 @@ path = require('path'),
 fs = require('fs'),
 mkdirp = require('mkdirp');
 
-// the main index at /lexter/index.html
-exports.index = function (conf, reports, done) {
+let renderFile = function (conf, data, uri_file, done) {
 
-    mkdirp(path.join(conf.target, 'lexter'), function (e) {
+    ejs.renderFile(conf.layout, data,
 
-        ejs.renderFile(conf.layout, {
+        function (err, html) {
 
-            title: 'lexter',
-            layout: 'lexter_index.ejs',
-            reports: reports,
-            conf: conf,
+        if (err) {
 
-        }, function (err, html) {
+            console.log(err);
+
+        }
+
+        fs.writeFile(uri_file, html, 'utf-8', function (err) {
 
             if (err) {
 
@@ -29,21 +29,25 @@ exports.index = function (conf, reports, done) {
 
             }
 
-            let uri = path.join(conf.target, 'lexter', 'index.html');
-
-            fs.writeFile(uri, html, 'utf-8', function (err) {
-
-                if (err) {
-
-                    console.log(err);
-
-                }
-
-                done();
-
-            });
+            done();
 
         });
+
+    });
+
+};
+
+// the main index at /lexter/index.html
+exports.index = function (conf, reports, done) {
+
+    mkdirp(path.join(conf.target, 'lexter'), function (e) {
+
+        renderFile(conf, {
+            title: 'lexter',
+            layout: 'lexter_index.ejs',
+            reports: reports,
+            conf: conf,
+        }, path.join(conf.target, 'lexter', 'index.html'), done);
 
     });
 
@@ -65,43 +69,17 @@ exports.each = function (conf, reports, done) {
             mkdirp(uri, function (e) {
 
                 if (e) {
-
                     console.log(e);
-
                 }
 
-                //console.log('uri: ' + uri);
-
-                ejs.renderFile(conf.layout, {
-
+                renderFile(conf, {
                     title: 'lexter',
                     layout: 'lexter_each.ejs',
                     report: report,
                     conf: conf,
-
-                }, function (err, html) {
-
-                    if (err) {
-
-                        console.log(err);
-
-                    }
-
-                    let uri_file = path.join(uri, path.basename(report.href));
-
-                    fs.writeFile(uri_file, html, 'utf-8', function (err) {
-
-                        if (err) {
-
-                            console.log(err);
-
-                        }
-
-                        i += 1;
-                        loop();
-
-                    });
-
+                }, path.join(uri, path.basename(report.href)), function () {
+                    i += 1;
+                    loop();
                 });
 
             });
@@ -115,5 +93,24 @@ exports.each = function (conf, reports, done) {
     };
 
     loop();
+
+};
+
+exports.eachIndex = function (conf, reports, done) {
+
+    mkdirp(path.join(conf.target,'lexter'), function (e) {
+
+        if (e) {
+            console.log(e);
+        }
+
+        renderFile(conf, {
+            title: 'lexter',
+            layout: 'lexter_each_index.ejs',
+            reports: reports,
+            conf: conf,
+        }, path.join(conf.target,'lexter','each_index_1.html'), done);
+
+    });
 
 };

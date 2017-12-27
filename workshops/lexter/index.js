@@ -10,7 +10,11 @@ exports.build = function (conf, done) {
 
         html.each(conf, reports, function () {
 
-            html.index(conf, reports, done);
+            html.eachIndex(conf, reports, function () {
+
+                html.index(conf, reports, done);
+
+            });
 
         });
 
