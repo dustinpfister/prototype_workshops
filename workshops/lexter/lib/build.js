@@ -89,7 +89,7 @@ exports.buildReports = function (conf, done) {
 
             report.href = filename.replace(path.basename(conf.target), '');
             report.text = $('body').text();
-            report.tokens = tokenize(report.text);
+            report.tokens = tokenize(report.text.toLowerCase());
             report.wordCount = report.tokens.length;
 
             reports.push(report);

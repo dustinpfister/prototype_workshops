@@ -10,12 +10,16 @@
         <li><a href="<%= report.href %>">link to page</a></li>
     </ul>
 
+    <h3>Page Tokens: </h3>
+    <textarea style="width:50%;height:240px;">
+            <%= report.tokens %>
+    </textarea>
+
     <h3>Misc:</h3>
     <ul>
 
         <li>href: <a href="<%= report.href %>"><%= report.href %></a></li>
         <li>text: <%= report.text %></li>
-        <li>tokens: <%= report.tokens %></li>
 
     </ul>
 
