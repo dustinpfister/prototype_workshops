@@ -6,6 +6,7 @@ build.js for lexter
 
 let cheerio = require('cheerio'),
 path = require('path'),
+natural = require('natural'),
 dir = require('node-dir');
 
 // read the whole target path in conf.target, and runt the forFile method for each file found
@@ -42,6 +43,12 @@ let readTarget = function (conf, forFile) {
 
 };
 
+let tokenize = function (text) {
+
+    return new natural.WordTokenizer().tokenize(text);
+
+};
+
 // buildReports method
 exports.buildReports = function (conf, done) {
 
@@ -61,8 +68,8 @@ exports.buildReports = function (conf, done) {
             let report = {};
 
             report.href = filename.replace(path.basename(conf.target), '');
-			report.text = $('body').text()
-			report.tokens = report.text.trim().split(' ');
+            report.text = $('body').text();
+            report.tokens = tokenize(report.text);
             report.wordCount = report.tokens.length;
 
             reports.push(report);
