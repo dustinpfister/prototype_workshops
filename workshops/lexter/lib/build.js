@@ -42,7 +42,7 @@ let readTarget = function (conf, forFile) {
 
 };
 
-// old buildReports method
+// buildReports method
 exports.buildReports = function (conf, done) {
 
     console.log('lexter: build reports:');
@@ -55,13 +55,15 @@ exports.buildReports = function (conf, done) {
         // for each file
         let $ = cheerio.load(content);
 
-        // paragraphs?
+        // paragraphs
         if ($('p').length > 0) {
 
             let report = {};
 
             report.href = filename.replace(path.basename(conf.target), '');
-            report.wordCount = $('p').text().split(' ').length;
+			report.text = $('body').text()
+			report.tokens = report.text.trim().split(' ');
+            report.wordCount = report.tokens.length;
 
             reports.push(report);
 
