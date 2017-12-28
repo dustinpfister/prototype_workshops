@@ -29,15 +29,27 @@ let checkImages = function (uri, self) {
 
 };
 
-let process = function (conf,files,self) {
+let process = function (conf, files, collectionName, self) {
 
     self.log('processing collection.');
 
     return new Promise(function (resolve, reject) {
 
-	
-	
-        resolve();
+        let uri = path.join(conf.target, 'img', 'jimpster', collectionName);
+
+        mkdirp(uri, function (e) {
+
+            if (e) {
+
+                reject(e);
+
+            }
+
+            self.log(uri);
+
+            resolve();
+
+        });
 
     });
 
@@ -83,7 +95,7 @@ exports.build = function (conf, done) {
 
                         checkImages(uri, self).then(function (files) {
 
-                            return process(conf,files,self);
+                            return process(conf, files, collections[i], self);
 
                         }).then(function () {
 
