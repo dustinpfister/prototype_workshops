@@ -51,6 +51,8 @@ require('./lib/crawl.js').crawl().then(function (report) {
 
         let ws_index = require('./workshops/' + report.ws[i].name + '/index.js');
 
+		console.log('yes!!! : ' + report.ws[i].name);
+		
         ws_index.build.call({
 
             wsName: report.ws[i].name,

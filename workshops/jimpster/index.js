@@ -138,7 +138,7 @@ let process = function (conf, files, collectionName, self) {
 
 };
 
-let html_index = function (conf, self, done) {
+let html_index = function (conf, self) {
 
     return new Promise(function (resolve, reject) {
 
@@ -239,15 +239,20 @@ exports.build = function (conf, done) {
 
             } else {
 
-                //done();
-
-                html_index(conf, self, function () {
+\
+                html_index(conf, self).then(function () {
 
                     self.log('done building jimpster index.');
 
                     done();
 
-                });
+                }).catch (function (e) {
+
+                    self.log(e);
+
+                    done();
+
+                })
 
             }
 
