@@ -87,21 +87,38 @@ let process = function (conf, files, collectionName, self) {
 
                     let uri_file = path.join(uri, i + '_320.jpg');
 
-                    self.log('processing: ' + uri_file);
+                    fs.access(uri_file, function (e, stat) {
 
-                    jimp.read(files[i], function (err, img) {
+                        let force = false;
 
-                        if (err) {
+                        if (e || force) {
 
-                            reject(err);
+                            self.log('processing: ' + uri_file);
+
+                            jimp.read(files[i], function (err, img) {
+
+                                if (err) {
+
+                                    reject(err);
+
+                                }
+
+                                img.resize(320, jimp.AUTO)
+                                .write(uri_file);
+
+                                i += 1;
+                                loop();
+
+                            });
+
+                        } else {
+
+                            self.log('file: ' + uri_file + ' found, skiping...');
+
+                            i += 1;
+                            loop();
 
                         }
-
-                        img.resize(320, jimp.AUTO)
-                        .write(uri_file);
-
-                        i += 1;
-                        loop();
 
                     });
 
