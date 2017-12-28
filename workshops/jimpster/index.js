@@ -1,5 +1,6 @@
 let fs = require('fs'),
 path = require('path'),
+mkdirp = require('mkdirp'),
 dir = require('node-dir');
 
 let checkImages = function (uri, self) {
@@ -23,6 +24,20 @@ let checkImages = function (uri, self) {
             resolve(files);
 
         });
+
+    });
+
+};
+
+let process = function (conf,files,self) {
+
+    self.log('processing collection.');
+
+    return new Promise(function (resolve, reject) {
+
+	
+	
+        resolve();
 
     });
 
@@ -66,7 +81,11 @@ exports.build = function (conf, done) {
 
                         self.log('collection is a dir, looking for images...');
 
-                        checkImages(uri, self).then(function () {
+                        checkImages(uri, self).then(function (files) {
+
+                            return process(conf,files,self);
+
+                        }).then(function () {
 
                             self.log('files:');
 
