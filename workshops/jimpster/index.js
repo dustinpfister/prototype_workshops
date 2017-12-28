@@ -4,6 +4,7 @@ mkdirp = require('mkdirp'),
 jimp = require('jimp'),
 dir = require('node-dir');
 
+// check for images at the given uri
 let checkImages = function (uri, self) {
 
     return new Promise(function (resolve, reject) {
@@ -30,9 +31,10 @@ let checkImages = function (uri, self) {
 
 };
 
+// process an image collection
 let process = function (conf, files, collectionName, self) {
 
-    self.log('processing collection.');
+    self.log('processing image collection: ' + collectionName);
 
     return new Promise(function (resolve, reject) {
 
@@ -53,8 +55,8 @@ let process = function (conf, files, collectionName, self) {
 
                 if (i < len) {
 
-				    let uri_file = path.join(uri, i + '_320.jpg');
-				
+                    let uri_file = path.join(uri, i + '_320.jpg');
+
                     self.log('processing: ' + uri_file);
 
                     jimp.read(files[i], function (err, img) {
@@ -133,7 +135,7 @@ exports.build = function (conf, done) {
 
                         }).then(function () {
 
-                            self.log('files:');
+                            self.log('done processing collection: ' + collections[i]);
 
                             i += 1;
                             loop();
