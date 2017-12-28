@@ -1,3 +1,6 @@
 active: true
-
+nav:
+  - label : gallery
+    href : /gallery
+    rank : 1
 source: ./source/img/_jimpster
