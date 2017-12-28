@@ -37,6 +37,7 @@ let process = function (conf, files, collectionName, self) {
 
         let uri = path.join(conf.target, 'img', 'jimpster', collectionName);
 
+        // make sure the path is there
         mkdirp(uri, function (e) {
 
             if (e) {
@@ -45,9 +46,26 @@ let process = function (conf, files, collectionName, self) {
 
             }
 
-            self.log(uri);
+            let i = 0,
+            len = files.length,
+            loop = function () {
 
-            resolve();
+                if (i < len) {
+
+                    self.log('processing: ' + files[i]);
+
+                    i += 1;
+                    loop();
+
+                } else {
+
+                    resolve();
+
+                }
+
+            };
+
+            loop();
 
         });
 
