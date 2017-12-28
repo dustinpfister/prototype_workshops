@@ -91,6 +91,18 @@ let process = function (conf, files, collectionName, self) {
 
 };
 
+let html_index = function (conf, self, done) {
+
+    return new Promise(function (resolve, reject) {
+
+        self.log('building jimpster index...');
+
+        resolve();
+
+    });
+
+};
+
 exports.build = function (conf, done) {
 
     let self = this;
@@ -160,7 +172,15 @@ exports.build = function (conf, done) {
 
             } else {
 
-                done();
+                //done();
+
+                html_index(conf, self, function () {
+
+                    self.log('done building jimpster index.');
+
+                    done();
+
+                });
 
             }
 
