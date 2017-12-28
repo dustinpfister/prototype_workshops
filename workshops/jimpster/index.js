@@ -171,6 +171,35 @@ let html_index = function (conf, self) {
 
 };
 
+// is the given uri a dir?
+let isDir = function (uri) {
+
+    return new Promise(function (resolve, reject) {
+
+        fs.stat(uri, function (e, stat) {
+
+            if (e) {
+
+                reject(e)
+
+            }
+
+            if (stat.isDirectory()) {
+
+                resolve(uri);
+
+            } else {
+
+                reject(new Error('not a dir'));
+
+            }
+
+        });
+
+    });
+
+};
+
 // get collection names from source folder
 let getCollectionNames = function (conf) {
 
@@ -192,92 +221,174 @@ let getCollectionNames = function (conf) {
 
 };
 
-exports.build = function (conf, done) {
+// filter anything that is not a directory from collection names
+let filterCollectionNames = function (conf, self) {
 
-    let self = this;
+    let names = [];
 
-    this.log('jimpster');
+    return new Promise(function (resolve, reject) {
 
-    getCollectionNames(conf).then(function (collections) {
+        return getCollectionNames(conf).then(function (collections) {
 
-        let i = 0,
-        len = collections.length,
-        loop = function () {
+            var i = 0,
+            len = collections.length,
 
-            if (i < len) {
+            loop = function () {
 
-                self.log(' checking out collection: ' + collections[i]);
+                if (i < len) {
 
-                let uri = path.join(conf.source, collections[i]);
+                    isDir(path.join(conf.source, collections[i])).then(function (dir) {
 
-                fs.stat(uri, function (err, stat) {
-
-                    if (err) {
-
-                        self.log(err);
-
-                    }
-
-                    if (stat.isDirectory()) {
-
-                        self.log('collection is a dir, looking for images...');
-
-                        checkImages(uri, self).then(function (files) {
-
-                            return process(conf, files, collections[i], self);
-
-                        }).then(function () {
-
-                            self.log('done processing collection: ' + collections[i]);
-
-                            i += 1;
-                            loop();
-
-                        }).catch (function (e) {
-
-                            self.log(e);
-
-                            i += 1;
-                            loop();
-
-                        });
-
-                    } else {
+                        names.push(dir);
 
                         i += 1;
                         loop();
 
-                    }
+                    }).catch (function (e) {
 
-                });
+                        i += 1;
+                        loop();
 
-            } else {
+                    });
 
-                html_index(conf, self).then(function () {
+                } else {
 
-                    self.log('done building jimpster index.');
+                    resolve(names);
 
-                    done();
+                }
 
-                }).catch (function (e) {
+            };
 
-                    self.log(e);
+            loop();
 
-                    done();
+        }).catch (function (e) {
 
-                })
+            reject(e);
 
-            }
-
-        };
-
-        loop();
-
-    }).catch (function (e) {
-
-        self.log(e);
-        done();
+        });
 
     });
 
 };
+
+exports.build = function (conf, done) {
+
+    let self = this;
+
+    filterCollectionNames(conf, self).then(function (names) {
+
+        self.log(names);
+
+        done();
+
+    }).catch (function (e) {
+
+        self.log(e);
+
+        done();
+
+    });
+
+    /*
+    getCollectionNames(conf).then(function (collections) {
+
+    self.log(collections);
+
+    done();
+
+    });
+     */
+
+};
+
+/*
+exports.build = function (conf, done) {
+
+let self = this;
+
+this.log('jimpster');
+
+getCollectionNames(conf).then(function (collections) {
+
+let i = 0,
+len = collections.length,
+loop = function () {
+
+if (i < len) {
+
+self.log(' checking out collection: ' + collections[i]);
+
+let uri = path.join(conf.source, collections[i]);
+
+fs.stat(uri, function (err, stat) {
+
+if (err) {
+
+self.log(err);
+
+}
+
+if (stat.isDirectory()) {
+
+self.log('collection is a dir, looking for images...');
+
+checkImages(uri, self).then(function (files) {
+
+return process(conf, files, collections[i], self);
+
+}).then(function () {
+
+self.log('done processing collection: ' + collections[i]);
+
+i += 1;
+loop();
+
+}).catch (function (e) {
+
+self.log(e);
+
+i += 1;
+loop();
+
+});
+
+} else {
+
+i += 1;
+loop();
+
+}
+
+});
+
+} else {
+
+html_index(conf, self).then(function () {
+
+self.log('done building jimpster index.');
+
+done();
+
+}).catch (function (e) {
+
+self.log(e);
+
+done();
+
+})
+
+}
+
+};
+
+loop();
+
+}).catch (function (e) {
+
+self.log(e);
+done();
+
+});
+
+};
+*/
