@@ -1,4 +1,16 @@
-let fs = require('fs');
+let fs = require('fs'),
+path = require('path'),
+dir = require('node-dir');
+
+let checkImages = function (uri) {
+
+    return new Promise(function (resolve, reject) {
+
+        resolve();
+
+    });
+
+};
 
 exports.build = function (conf, done) {
 
@@ -16,9 +28,53 @@ exports.build = function (conf, done) {
 
         }
 
-        self.log(collections);
+        let i = 0,
+        len = collections.length,
+        loop = function () {
 
-        done();
+            if (i < len) {
+
+                self.log(' checking out collection: ' + collections[i]);
+
+                let uri = path.join(conf.source, collections[i]);
+
+                fs.stat(uri, function (err, stat) {
+
+                    if (err) {
+
+                        self.log(err);
+
+                    }
+
+                    if (stat.isDirectory()) {
+
+                        self.log('collection is a dir, looking for images...');
+
+                        checkImages(uri).then(function () {
+
+                            i += 1;
+                            loop();
+
+                        });
+
+                    } else {
+
+                        i += 1;
+                        loop();
+
+                    }
+
+                });
+
+            } else {
+
+                done();
+
+            }
+
+        };
+
+        loop();
     });
 
 };
