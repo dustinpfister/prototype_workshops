@@ -4,3 +4,6 @@ nav:
     href : /gallery
     rank : 1
 source: ./source/img/_jimpster
+
+theme:
+    layout : ./workshops/jimpster/theme/layout.ejs
