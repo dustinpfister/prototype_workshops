@@ -2,11 +2,27 @@ let fs = require('fs'),
 path = require('path'),
 dir = require('node-dir');
 
-let checkImages = function (uri) {
+let checkImages = function (uri, self) {
 
     return new Promise(function (resolve, reject) {
 
-        resolve();
+        dir.readFiles(uri, {}, function (err, content, filename, next) {
+
+            self.log('found image: ' + filename);
+
+            next();
+
+        }, function (err, files) {
+
+            if (err) {
+
+                reject(err);
+
+            }
+
+            resolve(files);
+
+        });
 
     });
 
@@ -50,7 +66,16 @@ exports.build = function (conf, done) {
 
                         self.log('collection is a dir, looking for images...');
 
-                        checkImages(uri).then(function () {
+                        checkImages(uri, self).then(function () {
+
+                            self.log('files:');
+
+                            i += 1;
+                            loop();
+
+                        }).catch (function (e) {
+
+                            self.log(e);
 
                             i += 1;
                             loop();
