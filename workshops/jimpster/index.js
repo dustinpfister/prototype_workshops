@@ -1,6 +1,7 @@
 let fs = require('fs'),
 path = require('path'),
 mkdirp = require('mkdirp'),
+jimp = require('jimp'),
 dir = require('node-dir');
 
 let checkImages = function (uri, self) {
@@ -52,10 +53,25 @@ let process = function (conf, files, collectionName, self) {
 
                 if (i < len) {
 
-                    self.log('processing: ' + files[i]);
+				    let uri_file = path.join(uri, i + '_320.jpg');
+				
+                    self.log('processing: ' + uri_file);
 
-                    i += 1;
-                    loop();
+                    jimp.read(files[i], function (err, img) {
+
+                        if (err) {
+
+                            reject(err);
+
+                        }
+
+                        img.resize(320, jimp.AUTO)
+                        .write(uri_file);
+
+                        i += 1;
+                        loop();
+
+                    });
 
                 } else {
 
