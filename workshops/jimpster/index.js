@@ -138,6 +138,7 @@ let process = function (conf, files, collectionName, self) {
 
 };
 
+// build the main index
 let html_index = function (conf, self) {
 
     return new Promise(function (resolve, reject) {
@@ -170,21 +171,34 @@ let html_index = function (conf, self) {
 
 };
 
+// get collection names from source folder
+let getCollectionNames = function (conf) {
+
+    return new Promise(function (resolve, reject) {
+
+        fs.readdir(conf.source, function (err, collections) {
+
+            if (err) {
+
+                reject(e);
+
+            }
+
+            resolve(collections);
+
+        });
+
+    });
+
+};
+
 exports.build = function (conf, done) {
 
     let self = this;
 
     this.log('jimpster');
 
-    fs.readdir(conf.source, function (err, collections) {
-
-        if (err) {
-
-            self.log('error getting collections source. Check source/img/_jimpster path');
-
-            done();
-
-        }
+    getCollectionNames(conf).then(function (collections) {
 
         let i = 0,
         len = collections.length,
@@ -258,6 +272,12 @@ exports.build = function (conf, done) {
         };
 
         loop();
+
+    }).catch (function (e) {
+
+        self.log(e);
+        done();
+
     });
 
 };
