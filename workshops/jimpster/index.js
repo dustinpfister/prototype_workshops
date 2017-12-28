@@ -239,7 +239,6 @@ exports.build = function (conf, done) {
 
             } else {
 
-\
                 html_index(conf, self).then(function () {
 
                     self.log('done building jimpster index.');
