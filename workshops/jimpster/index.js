@@ -87,7 +87,7 @@ let process = function (conf, files, collectionName, self) {
                 if (i < len) {
 
                     let uri_file = path.join(uri, i + '_320.jpg');
-                    uri_files.push(uri_file);
+                    uri_files.push('/img/jimpster/' + collectionName + '/' + i + '_320.jpg');
 
                     fs.access(uri_file, function (e, stat) {
 
