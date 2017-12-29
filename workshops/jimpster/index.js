@@ -68,7 +68,8 @@ let process = function (conf, files, collectionName, self) {
 
     return new Promise(function (resolve, reject) {
 
-        let uri = path.join(conf.target, 'img', 'jimpster', collectionName);
+        let uri = path.join(conf.target, 'img', 'jimpster', collectionName),
+        uri_files = [];
 
         // make sure the path is there
         mkdirp(uri, function (e) {
@@ -86,6 +87,7 @@ let process = function (conf, files, collectionName, self) {
                 if (i < len) {
 
                     let uri_file = path.join(uri, i + '_320.jpg');
+                    uri_files.push(uri_file);
 
                     fs.access(uri_file, function (e, stat) {
 
@@ -124,7 +126,7 @@ let process = function (conf, files, collectionName, self) {
 
                 } else {
 
-                    resolve();
+                    resolve(uri_files);
 
                 }
 
@@ -239,7 +241,7 @@ let filterCollectionNames = function (conf, self) {
 
                     isDir(path.join(conf.source, collections[i])).then(function (dir) {
 
-                        names.push(dir);
+                        names.push(collections[i]);
 
                         i += 1;
                         loop();
@@ -271,33 +273,101 @@ let filterCollectionNames = function (conf, self) {
 
 };
 
+// check a list of names, and build a list of images for each name
+let checkNames = function (conf, names, self) {
+
+    return new Promise(function (resolve, reject) {
+
+        let report = [],
+        i = 0,
+        len = names.length,
+
+        loop = function () {
+
+            if (i < len) {
+
+                checkImages(path.join(conf.source, names[i]), self).then(function (files) {
+
+                    return process(conf, files, names[i], self);
+
+                }).then(function (files) {
+
+                    report.push({
+
+                        name: names[i],
+                        files: files
+
+                    });
+
+                    i += 1;
+                    loop();
+
+                }).catch (function (e) {
+
+                    reject(e);
+
+                    i += 1;
+                    loop();
+
+                });
+
+            } else {
+
+                resolve(report);
+
+            }
+
+        };
+
+        loop();
+
+    });
+
+};
+
+let buildReport = function (conf, self) {
+
+    let report = {};
+
+    return new Promise(function (resolve, reject) {
+
+        return filterCollectionNames(conf, self).then(function (names) {
+
+            report.names = names;
+
+            //resolve(report);
+
+            return checkNames(conf, names, self);
+
+        }).then(function (report) {
+
+            resolve(report);
+
+        }).catch (function (e) {
+
+            reject(e);
+
+        });
+
+    });
+
+};
+
 exports.build = function (conf, done) {
 
     let self = this;
 
-    filterCollectionNames(conf, self).then(function (names) {
+    buildReport(conf, this).then(function (report) {
 
-        self.log(names);
-
+        self.log(report);
         done();
 
-    }).catch (function (e) {
+    }).catch (function (err) {
 
-        self.log(e);
-
+        self.log(err);
         done();
 
     });
-
-    /*
-    getCollectionNames(conf).then(function (collections) {
-
-    self.log(collections);
-
-    done();
-
-    });
-     */
 
 };
 
