@@ -32,7 +32,8 @@ html.post = function (conf, report, done) {
     let uri_date = path.join(conf.target, report.path),
     uri_post = path.join(uri_date, report.fn),
     uri_filename = 'index.html',
-    uri = path.join(uri_post, uri_filename);
+    uri = path.join(uri_post, uri_filename),
+    self = this;
 
     // make sure the post uri is there
     mkdirp(uri_post, function (err) {
@@ -57,7 +58,7 @@ html.post = function (conf, report, done) {
                 // write the file
                 fs.writeFile(uri, html, 'utf-8', function (e) {
 
-                    log('generated: ' + uri);
+                    self.log('generated: ' + uri, 'render');
                     done();
 
                 });
@@ -74,15 +75,17 @@ html.post = function (conf, report, done) {
 html.years = function (conf, db, done) {
 
     done = done || function () {};
-    log('**********');
-    log('building posts for year folders (/yyyy/mm/dd/postname) ');
 
-    var i = 0,
+    let api = this,
+    i = 0,
     len = db.reports.length;
+
+    api.log('**********','info');
+    api.log('building posts for year folders (/yyyy/mm/dd/postname)','info');
 
     loop = function () {
 
-        html.post(conf, db.reports[i], function () {
+        html.post.call(api, conf, db.reports[i], function () {
 
             i += 1;
 
@@ -92,8 +95,8 @@ html.years = function (conf, db, done) {
 
             } else {
 
-                log('all done with year folders');
-                log('**********');
+                api.log('all done with year folders', 'info');
+                api.log('**********');
                 done();
 
             }

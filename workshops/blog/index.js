@@ -6,15 +6,17 @@ build = function (conf, done) {
 
     done = done || function () {};
 
+    let api = this;
+
     // build the database
     require('./lib/build_db.js').build(conf, function (db) {
 
         // build posts
-        html.years(conf, db, function () {
+        html.years.call(api, conf, db, function () {
 
             console.log('ready to build pages');
 
-            html.page(conf, db, function () {
+            html.page.call(api, conf, db, function () {
 
                 console.log('blog workshop is done.');
 
