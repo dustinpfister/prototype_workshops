@@ -1,13 +1,18 @@
-<h1>Jimpster index.</h1>
 
-<% report.forEach(function(collection){ %>
+<div class="wrap_main">
 
-    <h2>collection: <%= collection.name %></h2>
+    <h1>Jimpster index.</h1>
 
-    <% collection.files.forEach(function(file){ %>
+    <% report.forEach(function(collection){ %>
 
-	   <img src="<%= file %>">
-	
+        <h2>collection: <%= collection.name %></h2>
+
+        <% collection.files.forEach(function(file){ %>
+
+            <img src="<%= file %>">
+
+        <% }); %>
+
     <% }); %>
 
-<% }); %>
+</div>
