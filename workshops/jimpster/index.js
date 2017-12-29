@@ -155,7 +155,7 @@ let html_index = function (conf, report, self) {
 
             }
 
-            renderFile(conf, {
+            self.renderHTML(conf, {
 
                 title: 'jimpster - gallery index',
                 layout: 'jimpster_index.ejs',
