@@ -1,1 +1,14 @@
 <h1>Jimpster index.</h1>
+
+<% report.forEach(function(collection){ %>
+
+<h2>collection: <%= collection.name %></h2>
+
+<% collection.files.forEach(function(file){ %>
+
+<p>file: <%= file %></p>
+
+<% }); %>
+
+
+<% }); %>
