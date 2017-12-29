@@ -4,13 +4,39 @@ This is a prototype for an idea for a project that has to do with these things I
 
 ## What is a workshop?
 
-A workshop is a component of a static site generator that is responsible for generating a certain section of a web site such as a blog, or gallery. 
+A workshop is a component of a static site generator that is responsible for generating a certain section of a web site such as a blog, or a gallery. 
 
 It accepts input typically from a source folder, but it can also be another form of input such as a database, file system structure, json service, or even the content generated from another workshop. It then uses that input, in combination with a theme, to generate a static collection of files in a public html folder.
+
+At a minimum a site will want to use at least one workshop, such as one that just generates a single page in a certain specific fashion. However a site can also make use of a lengthy array of workshops that make together make all kinds of different content, in a very fresh, creative, interesting, and original way.
 
 ## Local themes.
 
 A local theme is a theme that is included with a workshop. This theme should be very basic, and should serve as a starting point for making a theme that will exist at the global level
+
+## site themes.
+
+( not implemented yet )
+
+## Workshops of interest
+
+As of [0.3.28](https://github.com/dustinpfister/prototype_workshops/tree/0.2.32) there are five workshops.
+
+### blog workshop
+
+added in [0.0.47]((https://github.com/dustinpfister/prototype_workshops/tree/0.0.47))
+
+This workshop builds markdown files at /source/_posts into a collection of html files in the target folder. Posts are written following a /yyyy/mm/dd/[md-file-name-less-extension]/index.html format, and it also builds a /page path as well in the target folder.
+
+### lexter workshop
+
+added in [0.2.32](https://github.com/dustinpfister/prototype_workshops/tree/0.2.32)
+
+The lexter workshop aims to be a lexical analyses workshop that builds pages that contain info like word count for each page on the site. It is not much now, but I aim for it to be a helpful tool for keyword research.
+
+### jimpster workshop
+
+jimpster uses the JavaScript image processing library [jimp](https://www.npmjs.com/package/jimp) to help automate the process of scaling images in a collection folder, and building a static structure that can be called a simple gallery.
 
 ## Versions
 
@@ -71,6 +97,8 @@ In this release I aim to get some work done on starting an api that will be used
 * created renderHTML method for the api based off a method I found myself copying and pasting across workshops called renderFile.
 * renderHTML working as expected, and now in use in place of copies of the renderFile method in lexter, and jimpster workshops.
 * added chalk.js to style output from the apis log method
+* using chalk.js to style output used with the api's log method
+* color based on log type (default=grey, info=blue, warn=yellow, error=red, render=green)
 
 ### Planed.
 
