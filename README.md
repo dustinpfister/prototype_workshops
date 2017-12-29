@@ -65,6 +65,12 @@ This is the current version I am developing not all features listed may be worki
 
 In this release I aim to get some work done on starting an api that will be used in workshops. It should help to make a lot of my workshop code cleaner. I also find myself repeating things that should be pulled into a common api.
 
+* added api_build.js in the root level /lib folder
+* using a method in api_build.js to build an object that led to what is now becoming the build api.
+* log method working in api_build.js
+* created renderHTML method for the api based off a method I found myself copying and pasting across workshops called renderFile.
+* renderHTML working as expected, and now in use in place of copies of the renderFile method in lexter, and jimpster workshops.
+
 ### Planed.
 
 These are future plans for the project, that may or may not happen. That is they may not happen in the order they appear, and in the state they appear, or maybe even at all so do not hold your breath.
