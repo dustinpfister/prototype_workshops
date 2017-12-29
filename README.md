@@ -101,6 +101,9 @@ In this release I aim to get some work done on starting an api that will be used
 * added chalk.js to style output from the apis log method
 * using chalk.js to style output used with the api's log method
 * color based on log type (default=grey, info=blue, warn=yellow, error=red, render=green)
+* renderHTML uses promises
+* renderHTML uses mkdirp so I don't have to use it in my work shops
+* updated all workshops to use new api in place of old way of doing things.
 
 ### Planed.
 
