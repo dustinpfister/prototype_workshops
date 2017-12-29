@@ -48,14 +48,22 @@ This is whats out so far with this.
 * started using [lowdb](https://www.npmjs.com/package/lowdb) for databases.
 * using the npm package [natural](https://www.npmjs.com/package/natural) for some lexical analyses tools.
 
+
+0.3.28 - Alpha IV - jimpster
+
+* jimpster: a new workshop that will build a gallery using images in a source folder.
+* added [jimp](https://www.npmjs.com/package/jimp) as a dependency
+* scaling images from /source/_jimpster/[collectionName]
+* scaled down images placed at /img/jimpster/[collectionName]/[fileName]
+* all images displayed in /gallery/index.html (for now)
+
 ### current
 
 This is the current version I am developing not all features listed may be working yet.
 
-0.3.x - Alpha IV - jimpster
+0.4.x -- Alpha V - Build API
 
-* jimpster: a new workshop that will build a gallery using images in a source folder.
-
+In this release I aim to get some work done on starting an api that will be used in workshops. It should help to make a lot of my workshop code cleaner. I also find myself repeating things that should be pulled into a common api.
 
 ### Planed.
 
