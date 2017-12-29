@@ -30,44 +30,53 @@ exports.index = function (conf, reports, done) {
 // builds the each path at /lexter/each
 exports.each = function (conf, reports, done) {
 
+    this.each(reports, function (report, i, reports, next) {
+        uri = path.join(conf.target, 'lexter', 'each', path.dirname(report.href));
+        let api = this;
+        mkdirp(uri, function (e) {
+            if (e) {
+                api.log(e);
+            }
+            api.renderHTML(conf, {
+                title: 'lexter',
+                layout: 'lexter_each.ejs',
+                report: report,
+                conf: conf,
+            }, path.join(uri, path.basename(report.href)), function () {
+                next();
+            });
+        });
+    }, done);
+
+    /*
     let api = this,
     i = 0,
     len = reports.length,
-
     loop = function () {
-
-        if (i < len) {
-
-            let report = reports[i],
-            uri = path.join(conf.target, 'lexter', 'each', path.dirname(report.href));
-
-            mkdirp(uri, function (e) {
-
-                if (e) {
-                    console.log(e);
-                }
-
-                api.renderHTML(conf, {
-                    title: 'lexter',
-                    layout: 'lexter_each.ejs',
-                    report: report,
-                    conf: conf,
-                }, path.join(uri, path.basename(report.href)), function () {
-                    i += 1;
-                    loop();
-                });
-
-            });
-
-        } else {
-
-            done();
-
-        }
-
-    };
-
+    if (i < len) {
+    let report = reports[i],
+    uri = path.join(conf.target, 'lexter', 'each', path.dirname(report.href));
+    mkdirp(uri, function (e) {
+    if (e) {
+    console.log(e);
+    }
+    api.renderHTML(conf, {
+    title: 'lexter',
+    layout: 'lexter_each.ejs',
+    report: report,
+    conf: conf,
+    }, path.join(uri, path.basename(report.href)), function () {
+    i += 1;
     loop();
+    });
+    });
+    } else {
+    done();
+    }
+    };
+    loop();
+
+     */
 
 };
 
@@ -77,7 +86,7 @@ exports.eachIndex = function (conf, reports, done) {
 
     this.log('building each index');
 
-    mkdirp(path.join(conf.target,'lexter'), function (e) {
+    mkdirp(path.join(conf.target, 'lexter'), function (e) {
 
         if (e) {
             console.log(e);
@@ -88,7 +97,7 @@ exports.eachIndex = function (conf, reports, done) {
             layout: 'lexter_each_index.ejs',
             reports: reports,
             conf: conf,
-        }, path.join(conf.target,'lexter','each_index_1.html'), done);
+        }, path.join(conf.target, 'lexter', 'each_index_1.html'), done);
 
     });
 

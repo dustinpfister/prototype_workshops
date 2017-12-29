@@ -24,7 +24,7 @@ As of [0.3.28](https://github.com/dustinpfister/prototype_workshops/tree/0.2.32)
 
 ### blog workshop
 
-added in [0.0.47]((https://github.com/dustinpfister/prototype_workshops/tree/0.0.47))
+added in [0.0.47](https://github.com/dustinpfister/prototype_workshops/tree/0.0.47)
 
 This workshop builds markdown files at /source/_posts into a collection of html files in the target folder. Posts are written following a /yyyy/mm/dd/[md-file-name-less-extension]/index.html format, and it also builds a /page path as well in the target folder.
 
@@ -35,6 +35,8 @@ added in [0.2.32](https://github.com/dustinpfister/prototype_workshops/tree/0.2.
 The lexter workshop aims to be a lexical analyses workshop that builds pages that contain info like word count for each page on the site. It is not much now, but I aim for it to be a helpful tool for keyword research.
 
 ### jimpster workshop
+
+added in [0.3.28](https://github.com/dustinpfister/prototype_workshops/tree/0.2.32)
 
 jimpster uses the JavaScript image processing library [jimp](https://www.npmjs.com/package/jimp) to help automate the process of scaling images in a collection folder, and building a static structure that can be called a simple gallery.
 
