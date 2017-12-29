@@ -52,7 +52,7 @@ require('./lib/crawl.js').crawl().then(function (report) {
 
         let ws_index = require('./workshops/' + report.ws[i].name + '/index.js');
 
-		ws_index.build.call(require('./lib/api_build.js').getAPI(ws),conf,onDone);
+		ws_index.build.call(require('./lib/api_build.js').getAPI(ws,conf),conf,onDone);
 		
 		/*
         ws_index.build.call({

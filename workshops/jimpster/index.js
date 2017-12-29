@@ -126,14 +126,16 @@ let html_index = function (conf, report, self) {
 
             }
 
-            self.renderHTML(conf, {
+            self.renderHTML_beta({
 
-                title: 'jimpster - gallery index',
-                layout: 'jimpster_index.ejs',
-                report: report,
-                conf: conf
+                uri: path.join(conf.target, 'gallery', 'index.html'),
+                eData: {
+                    title: 'jimpster - gallery index',
+                    layout: 'jimpster_index.ejs',
+                    report: report
+                }
 
-            }, path.join(conf.target, 'gallery', 'index.html'), function () {
+            }, function () {
 
                 resolve();
 
