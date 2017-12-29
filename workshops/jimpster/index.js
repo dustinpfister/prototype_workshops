@@ -135,11 +135,15 @@ let html_index = function (conf, report, self) {
                     report: report
                 }
 
-            }, function () {
+            }).then(function () {
 
                 resolve();
 
-            })
+            }).catch (function (e) {
+
+                reject(e);
+
+            });
 
         });
 
