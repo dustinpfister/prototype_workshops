@@ -14,30 +14,77 @@ exports.index = function (conf, reports, done) {
 
     let api = this;
 
-    mkdirp(path.join(conf.target, 'lexter'), function (e) {
+    api.renderHTML({
 
-        api.renderHTML(conf, {
+        uri: path.join(conf.target, 'lexter', 'index.html'),
+        mkdirp: 'lexter',
+        eData: {
             title: 'lexter',
             layout: 'lexter_index.ejs',
             reports: reports,
-            conf: conf,
-        }, path.join(conf.target, 'lexter', 'index.html'), done);
+        }
+
+    }).then(done).catch (function (e) {
+
+        api.log(e, 'error');
+        done();
 
     });
+
+    /*
+    mkdirp(path.join(conf.target, 'lexter'), function (e) {
+
+    api.renderHTML(conf, {
+    title: 'lexter',
+    layout: 'lexter_index.ejs',
+    reports: reports,
+    conf: conf,
+    }, path.join(conf.target, 'lexter', 'index.html'), done);
+
+    });
+     */
 
 };
 
 // builds the each path at /lexter/each
 exports.each = function (conf, reports, done) {
 
+
     this.each(reports, function (report, i, reports, next) {
+
         uri = path.join(conf.target, 'lexter', 'each', path.dirname(report.href));
         let api = this;
+
+        api.renderHTML({
+
+            uri: path.join(uri, path.basename(report.href)),
+            mkdirp: uri,
+            eData: {
+                title: 'lexter',
+                layout: 'lexter_each.ejs',
+                report: report
+            }
+
+        }).then(next).catch (function (e) {
+
+            api.log(e, 'error');
+            next();
+
+        });
+
+    },done);
+	
+/*
+    this.each(reports, function (report, i, reports, next) {
+        let uri = path.join(conf.target, 'lexter', 'each', path.dirname(report.href));
+        let api = this;
+		
+		
         mkdirp(uri, function (e) {
             if (e) {
                 api.log(e);
             }
-            api.renderHTML(conf, {
+            api.renderHTML_old(conf, {
                 title: 'lexter',
                 layout: 'lexter_each.ejs',
                 report: report,
@@ -46,7 +93,12 @@ exports.each = function (conf, reports, done) {
                 next();
             });
         });
+		
+		
     }, done);
+	
+*/
+
 
     /*
     let api = this,
@@ -86,19 +138,38 @@ exports.eachIndex = function (conf, reports, done) {
 
     this.log('building each index');
 
-    mkdirp(path.join(conf.target, 'lexter'), function (e) {
+    api.renderHTML({
 
-        if (e) {
-            console.log(e);
-        }
-
-        api.renderHTML(conf, {
+        uri: path.join(conf.target, 'lexter', 'each_index_1.html'),
+        mkdirp: path.join(conf.target, 'lexter'),
+        eData: {
             title: 'lexter',
             layout: 'lexter_each_index.ejs',
             reports: reports,
-            conf: conf,
-        }, path.join(conf.target, 'lexter', 'each_index_1.html'), done);
+        }
+
+    }).then(done).catch (function (e) {
+
+        api.log(e, 'error');
+        done();
 
     });
+
+    /*
+    mkdirp(path.join(conf.target, 'lexter'), function (e) {
+
+    if (e) {
+    console.log(e);
+    }
+
+    api.renderHTML(conf, {
+    title: 'lexter',
+    layout: 'lexter_each_index.ejs',
+    reports: reports,
+    conf: conf,
+    }, path.join(conf.target, 'lexter', 'each_index_1.html'), done);
+
+    });
+     */
 
 };

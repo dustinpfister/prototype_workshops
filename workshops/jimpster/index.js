@@ -118,7 +118,7 @@ let html_index = function (conf, report, self) {
 
         self.log('building jimpster index...');
 
-        self.renderHTML_beta({
+        self.renderHTML({
 
             uri: path.join(conf.target, 'gallery', 'index.html'),
             mkdirp: 'gallery',
