@@ -46,6 +46,7 @@ jimpster uses the JavaScript image processing library [jimp](https://www.npmjs.c
 
 This is whats out so far with this.
 
+
 [0.0.47 - Alpha I - Blog workshop started](https://github.com/dustinpfister/prototype_workshops/tree/0.0.47)
 
 * started work on my first workshop 'blog'
@@ -57,6 +58,7 @@ This is whats out so far with this.
 * /page path generated in public html folder.
 * started using hapi 16.x as a back end framework, currently just as a static server.
 
+
 [0.1.18 - Alpha II - indexer workshop](https://github.com/dustinpfister/prototype_workshops/tree/0.1.18)
 
 * new workshop that builds the main index.html at the site root.
@@ -66,6 +68,7 @@ This is whats out so far with this.
 * conf.yaml files for workshops
 * improved build process using crawl.js
 * added a css workshop that just copy's over a css file from source to the target for now.
+
 
 [0.2.32 - Alpha III - Lexter](https://github.com/dustinpfister/prototype_workshops/tree/0.2.32)
 
@@ -77,7 +80,7 @@ This is whats out so far with this.
 * using the npm package [natural](https://www.npmjs.com/package/natural) for some lexical analyses tools.
 
 
-0.3.28 - Alpha IV - jimpster
+[0.3.28 - Alpha IV - jimpster](https://github.com/dustinpfister/prototype_workshops/tree/0.3.28)
 
 * jimpster: a new workshop that will build a gallery using images in a source folder.
 * added [jimp](https://www.npmjs.com/package/jimp) as a dependency
@@ -85,13 +88,8 @@ This is whats out so far with this.
 * scaled down images placed at /img/jimpster/[collectionName]/[fileName]
 * all images displayed in /gallery/index.html (for now)
 
-### current
 
-This is the current version I am developing not all features listed may be working yet.
-
-0.4.x -- Alpha V - Build API
-
-In this release I aim to get some work done on starting an api that will be used in workshops. It should help to make a lot of my workshop code cleaner. I also find myself repeating things that should be pulled into a common api.
+[0.4.x - Alpha V - Build API](https://github.com/dustinpfister/prototype_workshops/tree/0.4.19)
 
 * added api_build.js in the root level /lib folder
 * using a method in api_build.js to build an object that led to what is now becoming the build api.
@@ -105,6 +103,22 @@ In this release I aim to get some work done on starting an api that will be used
 * renderHTML uses mkdirp so I don't have to use it in my work shops
 * updated all workshops to use new api in place of old way of doing things.
 
+
+### current
+
+This is the current version I am developing not all features listed may be working yet.
+
+0.5.x - Alpha VI - data base phase, and keylinker workshop
+
+In this version I aim to make one more workshop, while also finding ways of making a better core application by having more than one phase for the build process. as such keylinker will be the first workshop that exports more than just a build method from it's index.js file.
+
+* start work on keylinker workshop
+* have both a db, and build method for the workshop in the index.js file for the workshop
+* have the root index.js file call a workshops db method, if there, before continuing on to build.
+* have a method in the buildAPI that allows for me to access databases from the build api.
+* have the basic idea of keylinker working, with the blog.
+
+
 ### Planed.
 
 These are future plans for the project, that may or may not happen. That is they may not happen in the order they appear, and in the state they appear, or maybe even at all so do not hold your breath.
@@ -113,11 +127,6 @@ x.x.x - Global themes
 
 * /theme folder at root that contains the site wide theme that will be used by all workshops.
 * workshops will fall back to there local themes if a template is missing.
-
-x.x.x - Conf.yaml
-
-* conf.yaml file for /workshops path for setting values like workshop priority (which should build first)
-* conf.yaml file for / path to set site wide values.
 
 ### workshop ideas
 
@@ -138,45 +147,16 @@ x.x.x - blogger-idle
 * as the player progresses they unlock the ability to write better content.
 * plays just like a typical idle game
 
+
+## Core improvements
+
 x.x.x - workspaces
 
 * a workshop can provide something called a workspace that is a special full stack application that is used for development of content. For example the blog workshop can provide a workspace that is a text editor. Changes made in the workspace can be posted to a back end and then saved to a source folder.
 
-## core improvements
-
-x.x.x - build api
-
-when the build method of a workshop is called, an api that contains common suspects exsists  that can be used via the this keyword. An example of what I am talking about here is the use of this.log that exists now (as of 0.3.x).
-
-```js
-exports.build = function(){
-
-   this.log('building the workshop');
-   
-   let reports = getReports();
-   
-   this.renderFile({
-   
-        target: path.join(this.conf.target, 'lexter', 'index.html'),
-        conf: this.conf,
-        ejsData : {
-            title: 'lexter',
-            layout: 'lexter_index.ejs',
-            reports: reports,
-            conf: this.conf,
-        },
-        done: this.done
-   
-   });
-   
-};
-```
-
-As I keep writing more workshops it looks like there are things that keep coming up again, and again. That kind of something should be part of an api that can be called inside the body of a build method of a workshop.
-
 x.x.x - db method in index.js of workshops
 
-workshops should move in the direction of having a process in which databases are built, and or updated prier to the build process. The way things are going now is a little weird.
+workshops should move in the direction of having a process in which databases are built, and or updated prier to the build process. The way things are going now is a little weird, often involving building an object on the fly rather than working with one that is stored in the project folder.
 
 ```js
 exports.db = function(conf,done){
