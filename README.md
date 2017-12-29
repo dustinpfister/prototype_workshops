@@ -70,6 +70,7 @@ In this release I aim to get some work done on starting an api that will be used
 * log method working in api_build.js
 * created renderHTML method for the api based off a method I found myself copying and pasting across workshops called renderFile.
 * renderHTML working as expected, and now in use in place of copies of the renderFile method in lexter, and jimpster workshops.
+* added chalk.js to style output from the apis log method
 
 ### Planed.
 
