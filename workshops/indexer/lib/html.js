@@ -11,12 +11,6 @@ mkdirp = require('mkdirp'),
 fs = require('fs'),
 ejs = require('ejs'),
 
-log = function (mess) {
-
-    return console.log(mess);
-
-},
-
 html = {};
 
 // write the main index.html file
@@ -24,38 +18,50 @@ html.index = function (conf, done) {
 
     done = done || function () {};
 
-    let uri = path.join(conf.target, 'index.html');
+    let api = this;
 
-    // make sure the post uri is there
-    //mkdirp(uri, function (err) {
+    let html = '<p> So this needs some work. </p>';
 
-        let html = '<p> So this needs some work. </p>';
+    api.renderHTML({
 
-        //fs.readFile(report.uri, 'utf-8', function (e, md) {
+        uri: path.join(conf.target, 'index.html'),
+        eData: {
+            title: 'site index',
+            layout: 'index.ejs',
+            content: html
+        }
 
-            ejs.renderFile(conf.layout, {
+    }).then(function () {
 
-                title: 'site index',
-                layout: 'index.ejs',
-                conf: conf,
-                content: html,
+        done();
 
-            },
-            function (e, html) {
+    }).catch (function (e) {
 
-                // write the file
-                fs.writeFile(uri, html, 'utf-8', function (e) {
+        done(e);
 
-                    log('generated: ' + uri);
-                    done();
+    });
 
-                });
+    /*
+    ejs.renderFile(conf.layout, {
 
-            });
+    title: 'site index',
+    layout: 'index.ejs',
+    conf: conf,
+    content: html,
 
-        //});
+    },
+    function (e, html) {
 
-    //});
+    // write the file
+    fs.writeFile(uri, html, 'utf-8', function (e) {
+
+    api.log('generated: ' + uri, 'render');
+    done();
+
+    });
+
+    });
+     */
 
 };
 

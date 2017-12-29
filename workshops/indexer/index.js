@@ -6,12 +6,10 @@ build = function (conf, done) {
 
     done = done || function () {};
 
-    console.log('indexer');
+    this.log('getting started with indexer','info');
 
-    html.index(conf, done);
+    html.index.call(this,conf, done);
 
 };
-
-
 
 exports.build = build;
