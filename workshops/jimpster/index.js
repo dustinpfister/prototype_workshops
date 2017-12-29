@@ -118,32 +118,23 @@ let html_index = function (conf, report, self) {
 
         self.log('building jimpster index...');
 
-        mkdirp(path.join(conf.target, 'gallery'), function (e) {
+        self.renderHTML_beta({
 
-            if (e) {
-
-                reject(e)
-
+            uri: path.join(conf.target, 'gallery', 'index.html'),
+            mkdirp: 'gallery',
+            eData: {
+                title: 'jimpster - gallery index',
+                layout: 'jimpster_index.ejs',
+                report: report
             }
 
-            self.renderHTML_beta({
+        }).then(function () {
 
-                uri: path.join(conf.target, 'gallery', 'index.html'),
-                eData: {
-                    title: 'jimpster - gallery index',
-                    layout: 'jimpster_index.ejs',
-                    report: report
-                }
+            resolve();
 
-            }).then(function () {
+        }).catch (function (e) {
 
-                resolve();
-
-            }).catch (function (e) {
-
-                reject(e);
-
-            });
+            reject(e);
 
         });
 
