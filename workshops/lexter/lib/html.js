@@ -9,6 +9,7 @@ path = require('path'),
 fs = require('fs'),
 mkdirp = require('mkdirp');
 
+/*
 let renderFile = function (conf, data, uri_file, done) {
 
     ejs.renderFile(conf.layout, data,
@@ -36,13 +37,16 @@ let renderFile = function (conf, data, uri_file, done) {
     });
 
 };
+*/
 
 // the main index at /lexter/index.html
 exports.index = function (conf, reports, done) {
 
+    let api = this;
+
     mkdirp(path.join(conf.target, 'lexter'), function (e) {
 
-        renderFile(conf, {
+        api.renderHTML(conf, {
             title: 'lexter',
             layout: 'lexter_index.ejs',
             reports: reports,
@@ -56,7 +60,8 @@ exports.index = function (conf, reports, done) {
 // builds the each path at /lexter/each
 exports.each = function (conf, reports, done) {
 
-    let i = 0,
+    let api = this,
+    i = 0,
     len = reports.length,
 
     loop = function () {
@@ -72,7 +77,7 @@ exports.each = function (conf, reports, done) {
                     console.log(e);
                 }
 
-                renderFile(conf, {
+                api.renderHTML(conf, {
                     title: 'lexter',
                     layout: 'lexter_each.ejs',
                     report: report,
@@ -98,13 +103,17 @@ exports.each = function (conf, reports, done) {
 
 exports.eachIndex = function (conf, reports, done) {
 
+    let api = this;
+
+    this.log('building each index');
+
     mkdirp(path.join(conf.target,'lexter'), function (e) {
 
         if (e) {
             console.log(e);
         }
 
-        renderFile(conf, {
+        api.renderHTML(conf, {
             title: 'lexter',
             layout: 'lexter_each_index.ejs',
             reports: reports,

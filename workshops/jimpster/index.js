@@ -4,7 +4,7 @@ path = require('path'),
 mkdirp = require('mkdirp'),
 jimp = require('jimp'),
 dir = require('node-dir');
-
+/*
 // !! copied and pasted this from html.js in lexter
 let renderFile = function (conf, data, uri_file, done) {
 
@@ -33,6 +33,7 @@ let renderFile = function (conf, data, uri_file, done) {
     });
 
 };
+*/
 
 // check for images at the given uri
 let checkImages = function (uri, self) {
