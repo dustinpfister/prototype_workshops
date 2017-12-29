@@ -2,13 +2,12 @@
 
 <% report.forEach(function(collection){ %>
 
-<h2>collection: <%= collection.name %></h2>
+    <h2>collection: <%= collection.name %></h2>
 
-<% collection.files.forEach(function(file){ %>
+    <% collection.files.forEach(function(file){ %>
 
-<p>file: <%= file %></p>
-
-<% }); %>
-
+	   <img src="<%= file %>">
+	
+    <% }); %>
 
 <% }); %>
