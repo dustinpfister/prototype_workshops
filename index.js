@@ -8,14 +8,14 @@ let conf = {
     layout: './workshops/blog/theme/layout.ejs',
     db: './workshops/blog/db.json',
 
-    //uri_post_base: '../',
-
+/*
     nav: {
 
         home: '/',
         blog: '/page'
 
     },
+*/
 
     // page
     perPage: 4
@@ -46,11 +46,15 @@ require('./lib/crawl.js').crawl().then(function (report) {
     // what to do for the next workshop
     next = function () {
 
+	    // update the conf object for the workshop
         conf.layout = ws.theme.layout;
         conf.source = ws.source;
 
         let ws_index = require('./workshops/' + report.ws[i].name + '/index.js');
 
+		ws_index.build.call(require('./lib/api_build.js').getAPI(ws),conf,onDone);
+		
+		/*
         ws_index.build.call({
 
             wsName: report.ws[i].name,
@@ -71,6 +75,7 @@ require('./lib/crawl.js').crawl().then(function (report) {
             }
 
         }, conf, onDone);
+		*/
 
     };
 
