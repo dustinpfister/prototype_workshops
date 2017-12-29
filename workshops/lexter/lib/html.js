@@ -9,36 +9,6 @@ path = require('path'),
 fs = require('fs'),
 mkdirp = require('mkdirp');
 
-/*
-let renderFile = function (conf, data, uri_file, done) {
-
-    ejs.renderFile(conf.layout, data,
-
-        function (err, html) {
-
-        if (err) {
-
-            console.log(err);
-
-        }
-
-        fs.writeFile(uri_file, html, 'utf-8', function (err) {
-
-            if (err) {
-
-                console.log(err);
-
-            }
-
-            done();
-
-        });
-
-    });
-
-};
-*/
-
 // the main index at /lexter/index.html
 exports.index = function (conf, reports, done) {
 

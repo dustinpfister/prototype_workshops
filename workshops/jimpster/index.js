@@ -4,36 +4,6 @@ path = require('path'),
 mkdirp = require('mkdirp'),
 jimp = require('jimp'),
 dir = require('node-dir');
-/*
-// !! copied and pasted this from html.js in lexter
-let renderFile = function (conf, data, uri_file, done) {
-
-    ejs.renderFile(conf.layout, data,
-
-        function (err, html) {
-
-        if (err) {
-
-            console.log(err);
-
-        }
-
-        fs.writeFile(uri_file, html, 'utf-8', function (err) {
-
-            if (err) {
-
-                console.log(err);
-
-            }
-
-            done();
-
-        });
-
-    });
-
-};
-*/
 
 // check for images at the given uri
 let checkImages = function (uri, self) {
