@@ -141,7 +141,7 @@ let process = function (conf, files, collectionName, self) {
 };
 
 // build the main index
-let html_index = function (conf, self) {
+let html_index = function (conf, report, self) {
 
     return new Promise(function (resolve, reject) {
 
@@ -159,6 +159,7 @@ let html_index = function (conf, self) {
 
                 title: 'jimpster - gallery index',
                 layout: 'jimpster_index.ejs',
+                report: report,
                 conf: conf
 
             }, path.join(conf.target, 'gallery', 'index.html'), function () {
@@ -359,8 +360,21 @@ exports.build = function (conf, done) {
 
     buildReport(conf, this).then(function (report) {
 
-        self.log(report);
-        done();
+        html_index(conf, report, self).then(function () {
+
+            self.log('done building jimpster index.');
+
+            done();
+
+        }).catch (function (e) {
+
+            self.log(e);
+
+            done();
+
+        })
+
+            //done();
 
     }).catch (function (err) {
 
