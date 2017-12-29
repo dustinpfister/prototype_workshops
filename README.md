@@ -178,3 +178,46 @@ exports.build = function(conf,done){
    done();
 }
 ```
+
+## bin
+
+I would like to make this into a CLI tool that will be installed globally, and I would also like an init option that will setup a new site when called. As such I will want a way to check if a file exists in the current working path, and if so use that, in the event that it does not exist I will want it to copy in what exists in the module path.
+
+
+I have this worked out that seems to do the trick
+```
+#!/usr/bin/env node
+ 
+let fs = require('fs'),
+path = require('path');
+ 
+let local_copy = path.join(process.cwd(), 'package.json');
+ 
+fs.readFile(local_copy, 'utf-8', function (e, data) {
+ 
+    if (e) {
+ 
+        let module_copy = path.resolve(__dirname, 'package.json');
+ 
+        fs.readFile(module_copy, 'utf-8', function (e, data) {
+ 
+            if (e) {
+ 
+                console.log(e);
+ 
+            } else {
+ 
+                console.log(data);
+ 
+            }
+ 
+        });
+ 
+    } else {
+ 
+        console.log(data);
+ 
+    }
+ 
+});
+```
