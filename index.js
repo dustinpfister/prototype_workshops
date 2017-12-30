@@ -77,12 +77,14 @@ require('./lib/crawl.js').crawl().then(function (report) {
 
         let ws_index = require('./workshops/' + ws.name + '/index.js'),
 
+        // set up apis object
         apis = {
-
-            build: api_build.getAPI(ws, conf),
-            db: api_global.getAPI(ws, conf)
-
+            global: api_global.getAPI(ws, conf)
         };
+
+        // db and build apis
+        apis.db = api_global.getAPI(ws, conf);
+        apis.build = api_build.getAPI(ws, conf);
 
         if (ws_index.db) {
 
