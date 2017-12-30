@@ -46,9 +46,40 @@ exports.each = function (conf, reports, done) {
 
         uri = path.join(conf.target, 'lexter', 'each', path.dirname(report.href));
 
+        //next();
+
+        api.log('this is where the problem is', 'warn');
+        api.log(uri);
+        api.log('');
+        api.log('');
+        //next();
+
+        mkdirp(uri, function () {
+
+            api.renderHTML({
+
+                uri: path.join(uri, path.basename(report.href)),
+                //uri: uri,
+                mkdirp: uri,
+                eData: {
+                    title: 'lexter',
+                    layout: 'lexter_each.ejs',
+                    report: report
+                }
+
+            }).then(next).catch (function (e) {
+
+                api.log(e, 'error');
+                next();
+
+            });
+        });
+
+/*
         api.renderHTML({
 
             uri: path.join(uri, path.basename(report.href)),
+            //uri: uri,
             mkdirp: uri,
             eData: {
                 title: 'lexter',
@@ -62,6 +93,7 @@ exports.each = function (conf, reports, done) {
             next();
 
         });
+*/
 
     }, done);
 

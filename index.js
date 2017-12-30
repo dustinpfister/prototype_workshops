@@ -100,6 +100,7 @@ require('./lib/crawl.js').crawl().then(function (report) {
             ws_index.build.call(apis.build, conf, onDone);
 
         }
+
     };
 
     // merge down for conf_defaults
