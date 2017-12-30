@@ -1,6 +1,10 @@
 
 let _ = require('lodash'),
-path = require('path');
+path = require('path'),
+
+// my api scripts in root /lib
+api_build = require('./lib/api_build.js'),
+api_global = require('./lib/api_global.js');
 
 let conf_defaults = {
 
@@ -71,21 +75,26 @@ require('./lib/crawl.js').crawl().then(function (report) {
         console.log('');
         //console.log('********** **********');
 
-        let ws_index = require('./workshops/' + ws.name + '/index.js');
+        let ws_index = require('./workshops/' + ws.name + '/index.js'),
+
+        apis = {
+
+            build: api_build.getAPI(ws, conf),
+            db: api_global.getAPI(ws, conf)
+
+        };
 
         if (ws_index.db) {
 
-		   console.log('okay yeah.');
-		
-            ws_index.db.call({}, conf, function () {
+            ws_index.db.call(apis.db, conf, function () {
 
-                ws_index.build.call(require('./lib/api_build.js').getAPI(ws, conf), conf, onDone);
+                ws_index.build.call(apis.build, conf, onDone);
 
             });
 
         } else {
 
-            ws_index.build.call(require('./lib/api_build.js').getAPI(ws, conf), conf, onDone);
+            ws_index.build.call(apis.build, conf, onDone);
 
         }
     };
