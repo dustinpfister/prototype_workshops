@@ -39,6 +39,10 @@ require('./lib/crawl.js').crawl().then(function (report) {
     onDone = function () {
 
         console.log('done with: ' + ws.name);
+        console.log('********** **********');
+        console.log('');
+        console.log('');
+        console.log('');
 
         i += 1;
         if (i < len) {
@@ -64,12 +68,26 @@ require('./lib/crawl.js').crawl().then(function (report) {
         console.log('********** **********');
         console.log('workshop name: ' + ws.name);
         console.log('uri_db: ' + conf.uri_db);
-        console.log('********** **********');
+        console.log('');
+        //console.log('********** **********');
 
         let ws_index = require('./workshops/' + ws.name + '/index.js');
 
-        ws_index.build.call(require('./lib/api_build.js').getAPI(ws, conf), conf, onDone);
+        if (ws_index.db) {
 
+		   console.log('okay yeah.');
+		
+            ws_index.db.call({}, conf, function () {
+
+                ws_index.build.call(require('./lib/api_build.js').getAPI(ws, conf), conf, onDone);
+
+            });
+
+        } else {
+
+            ws_index.build.call(require('./lib/api_build.js').getAPI(ws, conf), conf, onDone);
+
+        }
     };
 
     // merge down for conf_defaults
