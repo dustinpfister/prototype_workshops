@@ -1,0 +1,14 @@
+
+<div class="wrap_lexter">
+
+    <h1>Lexter Page Reports Index</h1>
+
+    <ul>
+    <% reports.forEach(function(report){ %>
+
+        <li><a href="<%= '/lexter/each' + report.href %>"><%= '/lexter/each' + report.href %></a></li>
+
+    <% }); %>
+    </ul>
+
+</div>

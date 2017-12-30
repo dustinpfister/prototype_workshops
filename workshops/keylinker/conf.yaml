@@ -1,0 +1,8 @@
+active: true
+rank: 1
+nav:
+  - label : keylinker
+    href : /keylinker
+    rank : 0
+theme:
+    layout : ./workshops/keylinker/theme/layout.ejs

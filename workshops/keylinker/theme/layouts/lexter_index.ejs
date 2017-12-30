@@ -1,0 +1,28 @@
+
+<div class="wrap_lexter">
+
+    <h1>Lexter</h1>
+
+    lexical analyses of the site
+
+    <hr>
+
+    <h2><a href="/lexter/each_index_1.html">Each</a></h2>
+    <p>The each path has a lexer report for each file on the site. The path is consistent with the file structure of the site from root.</p>
+
+    <hr>
+
+    <h2>files by word count: </h2>
+    <% reports.forEach(function(report,index){ %>
+
+        <ul>
+
+            <li>#<%= index + 1 %></li>
+            <li>href: <a href="<%= report.href %>"><%= report.href %></a></li>
+            <li>word count: <%= report.wordCount %></li>
+
+        </ul>
+
+    <% }); %>
+
+</div>

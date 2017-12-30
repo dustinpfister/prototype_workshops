@@ -3,12 +3,13 @@
     {
       "filename": "html\\2017\\12\\20\\first\\index.html",
       "href": "\\2017\\12\\20\\first\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nfirst post\n2017:12:20\nThis is the first post that works with my blog workshop! A workshop is a new idea that I have for a project in which I have a collection of software components called workshops that each make a certain section of a static website.\n\n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    keylinker\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nfirst post\n2017:12:20\nThis is the first post that works with my blog workshop! A workshop is a new idea that I have for a project in which I have a collection of software components called workshops that each make a certain section of a static website.\n\n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "first",
         "post",
@@ -60,17 +61,18 @@
         "static",
         "website"
       ],
-      "wordCount": 54
+      "wordCount": 55
     },
     {
       "filename": "html\\2017\\12\\21\\blog-workshop\\index.html",
       "href": "\\2017\\12\\21\\blog-workshop\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe blog workshop rocks\n2017:12:21\nThe first workshop that I made for my workshops project is the blog workshop.This is a workshop that takes markdown and parses it into a static website.\n\n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    keylinker\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe blog workshop rocks\n2017:12:21\nThe first workshop that I made for my workshops project is the blog workshop.This is a workshop that takes markdown and parses it into a static website.\n\n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "the",
         "blog",
@@ -108,17 +110,18 @@
         "static",
         "website"
       ],
-      "wordCount": 40
+      "wordCount": 41
     },
     {
       "filename": "html\\2017\\12\\22\\indexer-workshop\\index.html",
       "href": "\\2017\\12\\22\\indexer-workshop\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe blog workshop rocks\n2017:12:22\nThe indexer workshop builds the main index of a static website found at the root path /. So far the indexer does not do much of anything, but in time it will serve a purpose.\n\n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    keylinker\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe blog workshop rocks\n2017:12:22\nThe indexer workshop builds the main index of a static website found at the root path /. So far the indexer does not do much of anything, but in time it will serve a purpose.\n\n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "the",
         "blog",
@@ -162,17 +165,18 @@
         "a",
         "purpose"
       ],
-      "wordCount": 46
+      "wordCount": 47
     },
     {
       "filename": "html\\2017\\12\\23\\rank-of-workshops\\index.html",
       "href": "\\2017\\12\\23\\rank-of-workshops\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe rank of a workshop.\n2017:12:23\nSome workshops need to get something done before another thing can be completed, this is where the rank of a workshop comes into play. rank can be set in the conf.yaml of a workshop.\n\n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    keylinker\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe rank of a workshop.\n2017:12:23\nSome workshops need to get something done before another thing can be completed, this is where the rank of a workshop comes into play. rank can be set in the conf.yaml of a workshop.\n\n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "the",
         "rank",
@@ -218,17 +222,18 @@
         "a",
         "workshop"
       ],
-      "wordCount": 48
+      "wordCount": 49
     },
     {
       "filename": "html\\2017\\12\\26\\lexter-workshop\\index.html",
       "href": "\\2017\\12\\26\\lexter-workshop\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe lexter workshop.\n2017:12:26\nOne of the main reasons why I started this project is because of the idea I had for this workshop that I have come to call lexter. Lexter is a workshop that analyses the content of a static site, and builds reports on the sites content.\nWord Count reports\nOne of the basic features of lexter is the word count report. This is just simply a list of links to each file that lexter checked out, and the count of words found on the page. This report alone is helpful for making a crude judgment on post quality, as it appears that google does seem to prefer lengthy posts on subjects.\n\n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    keylinker\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \nThe lexter workshop.\n2017:12:26\nOne of the main reasons why I started this project is because of the idea I had for this workshop that I have come to call lexter. Lexter is a workshop that analyses the content of a static site, and builds reports on the sites content.\nWord Count reports\nOne of the basic features of lexter is the word count report. This is just simply a list of links to each file that lexter checked out, and the count of words found on the page. This report alone is helpful for making a crude judgment on post quality, as it appears that google does seem to prefer lengthy posts on subjects.\n\n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "the",
         "lexter",
@@ -348,17 +353,18 @@
         "on",
         "subjects"
       ],
-      "wordCount": 122
+      "wordCount": 123
     },
     {
       "filename": "html\\index.html",
       "href": "\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n    root\n\n    gallery\n\n    words\n\n    lexter\n\n        \n    \n\n    \n        The site index:\n So this needs some work. \n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n    root\n\n    gallery\n\n    words\n\n    keylinker\n\n    lexter\n\n        \n    \n\n    \n        The site index:\n So this needs some work. \n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "the",
         "site",
@@ -369,17 +375,18 @@
         "some",
         "work"
       ],
-      "wordCount": 13
+      "wordCount": 14
     },
     {
       "filename": "html\\page\\2\\index.html",
       "href": "\\page\\2\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \n\n\n    page 2\n\n    \n\n        \n\n            first post\n            date : 2017:12:20\n\n        \n\n    \n\n    prev\n\n\n\n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    keylinker\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \n\n\n    page 2\n\n    \n\n        \n\n            first post\n            date : 2017:12:20\n\n        \n\n    \n\n    prev\n\n\n\n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "page",
         "2",
@@ -391,17 +398,18 @@
         "20",
         "prev"
       ],
-      "wordCount": 14
+      "wordCount": 15
     },
     {
       "filename": "html\\page\\index.html",
       "href": "\\page\\index.html",
-      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \n\n\n    page 1\n\n    \n\n        \n\n            The lexter workshop.\n            date : 2017:12:26\n\n        \n\n    \n\n        \n\n            The rank of a workshop.\n            date : 2017:12:23\n\n        \n\n    \n\n        \n\n            The blog workshop rocks\n            date : 2017:12:22\n\n        \n\n    \n\n        \n\n            The blog workshop rocks\n            date : 2017:12:21\n\n        \n\n    \n\n    next\n\n\n\n    \n\n\n\n\n\n",
+      "text": "\n\n\n\n    \n        WorkShops\n        \n            \n\n    root\n\n\n\n    gallery\n\n\n\n    words\n\n\n\n    keylinker\n\n\n\n    lexter\n\n\n        \n    \n\n    \n        \n\n\n    page 1\n\n    \n\n        \n\n            The lexter workshop.\n            date : 2017:12:26\n\n        \n\n    \n\n        \n\n            The rank of a workshop.\n            date : 2017:12:23\n\n        \n\n    \n\n        \n\n            The blog workshop rocks\n            date : 2017:12:22\n\n        \n\n    \n\n        \n\n            The blog workshop rocks\n            date : 2017:12:21\n\n        \n\n    \n\n    next\n\n\n\n    \n\n\n\n\n\n",
       "tokens": [
         "workshops",
         "root",
         "gallery",
         "words",
+        "keylinker",
         "lexter",
         "page",
         "1",
@@ -439,7 +447,7 @@
         "21",
         "next"
       ],
-      "wordCount": 40
+      "wordCount": 41
     },
     {
       "filename": "html\\gallery\\index.html",
