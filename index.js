@@ -2,7 +2,7 @@
 let _ = require('lodash'),
 path = require('path');
 
-let conf = {
+let conf_defaults = {
 
     source: './source/_posts',
     target: './html',
@@ -22,6 +22,9 @@ let conf = {
 
     // page
     perPage: 4
+
+    // !! additional properties get merged down into this after a crawl is
+    // preformed with crawl.js
 
 };
 
@@ -49,6 +52,8 @@ require('./lib/crawl.js').crawl().then(function (report) {
     // what to do for the next workshop
     next = function () {
 
+        let conf = _.clone(conf_defaults);
+
         // update the conf object for the workshop
         conf.layout = ws.theme.layout;
         conf.source = ws.source;
@@ -67,9 +72,10 @@ require('./lib/crawl.js').crawl().then(function (report) {
 
     };
 
-    // merge down for conf
-    conf = _.merge(conf, report.conf);
+    // merge down for conf_defaults
+    conf_defaults = _.merge(conf_defaults, report.conf);
 
+    // call next for the first time
     next();
 
 }).catch (function (err) {
