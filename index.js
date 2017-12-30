@@ -1,21 +1,24 @@
 
-let _ = require('lodash');
+let _ = require('lodash'),
+path = require('path');
 
 let conf = {
 
     source: './source/_posts',
     target: './html',
     layout: './workshops/blog/theme/layout.ejs',
+
+    // !! databases uris should not be stored this way
+    // it should not be hard coded here
+    // so far this is only used by the blog workshop
+    // so update the blog workshop and do away with this
+    // when a better system is in place
     db: './workshops/blog/db.json',
 
-/*
-    nav: {
-
-        home: '/',
-        blog: '/page'
-
-    },
-*/
+    // New way for database paths
+    // set a base path for where database will be stored
+    uri_db_base: './data/db',
+    uri_db: '', // the actual db path that will be set for each workshop
 
     // page
     perPage: 4
@@ -46,36 +49,21 @@ require('./lib/crawl.js').crawl().then(function (report) {
     // what to do for the next workshop
     next = function () {
 
-	    // update the conf object for the workshop
+        // update the conf object for the workshop
         conf.layout = ws.theme.layout;
         conf.source = ws.source;
 
-        let ws_index = require('./workshops/' + report.ws[i].name + '/index.js');
+        // setting database uri this way!
+        conf.uri_db = path.join(conf.uri_db_base, ws.name);
 
-		ws_index.build.call(require('./lib/api_build.js').getAPI(ws,conf),conf,onDone);
-		
-		/*
-        ws_index.build.call({
+        console.log('********** **********');
+        console.log('workshop name: ' + ws.name);
+        console.log('uri_db: ' + conf.uri_db);
+        console.log('********** **********');
 
-            wsName: report.ws[i].name,
+        let ws_index = require('./workshops/' + ws.name + '/index.js');
 
-            log: function (mess) {
-
-                if (typeof mess === 'string') {
-
-                    console.log(this.wsName + ' : ' + mess);
-
-                } else {
-
-                    console.log(this.wsName + ' :');
-                    console.log(mess);
-                    console.log('********** **********');
-                }
-
-            }
-
-        }, conf, onDone);
-		*/
+        ws_index.build.call(require('./lib/api_build.js').getAPI(ws, conf), conf, onDone);
 
     };
 
