@@ -42,6 +42,7 @@ require('./lib/crawl.js').crawl().then(function (report) {
     // what to do when done with a workshop
     onDone = function () {
 
+        console.log('');
         console.log('done with: ' + ws.name);
         console.log('********** **********');
         console.log('');
@@ -84,7 +85,7 @@ require('./lib/crawl.js').crawl().then(function (report) {
 
         // db and build apis
         apis.db = api_global.getAPI(ws, conf);
-        apis.build = api_build.getAPI(ws, conf);
+        apis.build = _.merge({},apis.global, api_build.getAPI(ws, conf));
 
         if (ws_index.db) {
 
