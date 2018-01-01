@@ -121,7 +121,7 @@ let html_index = function (conf, report, self) {
         self.renderHTML({
 
             uri: path.join(conf.target, 'gallery', 'index.html'),
-            mkdirp: 'gallery',
+            //mkdirp: Path.join(conf.target, 'gallery'),
             eData: {
                 title: 'jimpster - gallery index',
                 layout: 'jimpster_index.ejs',
