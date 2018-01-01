@@ -54,7 +54,7 @@ exports.each = function (conf, reports, done) {
         api.log('');
         //next();
 
-        mkdirp(uri, function () {
+        //mkdirp(uri, function () {
 
             api.renderHTML({
 
@@ -73,7 +73,7 @@ exports.each = function (conf, reports, done) {
                 next();
 
             });
-        });
+       // });
 
 /*
         api.renderHTML({
